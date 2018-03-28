@@ -1,0 +1,41 @@
+{
+  "name": "chair4share",
+  "main": "server.js",
+  "scripts": {
+    "start": "node build/bundle.js",
+    "test": "mocha --timeout 1000",
+    "dev": "NODE_ENV=development node server.js",
+    "build": "webpack -p --progress --optimize-minimize",
+    "doc":"apidoc -i app/ -f .js -o docs/"
+  },
+  "author": "Diogo Mendes",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "~1.0.1",
+    "cluster": "^0.7.7",
+    "crypto": "^1.0.1",
+    "dateformat": "^3.0.2",
+    "dotenv": "^5.0.0",
+    "express": "~4.0.0",
+    "express-routes-versioning": "^1.0.1",
+    "jsonwebtoken": "^8.1.1",
+    "mongoose": "^5.0.3",
+    "mysql2": "^1.5.1",
+    "os": "^0.1.1",
+    "sequelize": "^4.32.3"
+  },
+  "devDependencies": {
+    "assert": "^1.4.1",
+    "mocha": "^5.0.1",
+    "request": "^2.83.0",
+    "webpack": "^4.0.0",
+    "webpack-cli": "^2.0.9"
+  },
+  "apidoc": {
+    "name": "Chair4Share API Documentation",
+    "version": "1.0.0",
+    "order": [
+      "Authentication"
+    ]
+  }
+}
