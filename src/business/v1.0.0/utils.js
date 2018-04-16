@@ -66,12 +66,10 @@ exports.deleteAll = function () {
   return new Promise((resolve, reject) => {
     db.sequelize.query('SET FOREIGN_KEY_CHECKS = 0', { raw: true }).then(() => {
       db.User.truncate().then(() => {
-        db.Record.remove({}, () => {
-          db.sequelize.query('SET FOREIGN_KEY_CHECKS = 1', { raw: true }).then(
-            () => resolve(),
-            error => reject(error));
-        });
-      }, error => reject(error));
+        db.sequelize.query('SET FOREIGN_KEY_CHECKS = 1', { raw: true }).then(
+          () => resolve(),
+          error => reject(error));
+      });
     }, error => reject(error));
   });
 }

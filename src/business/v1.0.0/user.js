@@ -62,14 +62,12 @@ exports.login = (attributes) => {
 
 exports.changePassword = (user, attributes) => {
     return new Promise((resolve, reject) => {
-        if (/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)[A-Za-z\d$@$!%*#?&-.]{8,}$/.test(attributes.new_password)) {
-            let encrypted = utils.encrypt([attributes.old_password, attributes.new_password]);
+        if (/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)[A-Za-z\d$@$!%*#?&-.]{8,}$/.test(attributes.password)) {
+            let encrypted = utils.encrypt([attributes.password]);
             if (!encrypted.err) {
-                if (user.password === encrypted.value[0]) {
-                    user.update({ password: encrypted.value[1] }).then(
-                        () => resolve(),
-                        err => reject({ code: 500, msg: err.message }));
-                } else reject({ code: 500, msg: "old password don't match" });
+                user.update({ password: encrypted.value[0] }).then(
+                    () => resolve(),
+                    err => reject({ code: 500, msg: err.message }));
             } else reject({ code: 500, msg: encrypted.err.message });
         } else reject({ code: 500, msg: "invalid password, must have at least one uppercase letter, one lowercase, one digit and a minimum 8 characters" });
     });

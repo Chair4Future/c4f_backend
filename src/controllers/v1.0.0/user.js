@@ -44,7 +44,7 @@ exports.register = function (req, res) {
  * @apiSuccess {string} token jwt valid for 8 hours and must be placed at "Authorization" header
  */
 exports.login = function (req, res) {
-    business.user.login(req.body.email, req.body.password).then(
+    business.user.login(req.body).then(
         user => {
             business.utils.createToken(user, req.connection.remoteAddress).then(
                 token => res.status(200).json({ token: token, user: user.id }),
@@ -60,13 +60,12 @@ exports.login = function (req, res) {
  * @apiVersion 1.0.0
  * @apiUse auth
  * @apiHeader Authorization="< token >"
- * @apiParam {string} old_password old password
- * @apiParam {string} new_password new password
+ * @apiParam {string} password new password
  * @apiSuccess {boolean} result return true if was sucessfuly updated
  */
 exports.changePassword = function (req, res) {
     if (req.client && req.client.constructor.name === "User") {
-        business.user.changePassword(req.client, req.body.old_password, req.body.new_password).then(
+        business.user.changePassword(req.client, req.body).then(
             () => res.status(200).json({ result: true }),
             error => res.status(error.code).send(error.msg));
     } else {

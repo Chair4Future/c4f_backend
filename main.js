@@ -50,14 +50,15 @@ if (cluster.isMaster) {
     // define our app using express
     var app = express();
 
-    // Present SPA
-    app.use('/', express.static(path.resolve(__dirname, 'public')));
-    // Present Documentation
-    app.use('/docs', express.static(path.resolve(__dirname, 'docs')));
     // middleware routes
     middleware(app);
     // Register routes
     router(app);
+
+    // Present SPA
+    app.use('/', express.static(path.resolve(__dirname, 'public')));
+    // Present Documentation
+    app.use('/docs', express.static(path.resolve(__dirname, 'docs')));
 
     // Define the listenning port
     var port = process.env.PORT || 3000;

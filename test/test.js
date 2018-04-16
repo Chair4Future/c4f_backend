@@ -1,7 +1,7 @@
 var request = require("request"),
     assert = require('assert'),
     port = process.env.PORT || 8080;
-var base_url = "http://localhost:8080/";
+var base_url = "http://localhost:3000/";
 var user_headers = { "Accept-Version": "1.0.0", "Content-Type": "application/json" };
 var admin_headers = { "Accept-Version": "1.0.0", "Content-Type": "application/json" };
 var user;
@@ -9,24 +9,9 @@ var user;
 describe("Tests", () => {
 
     before((done) => {
-        request.get(base_url, (error, response, body) => {
+        request.get(base_url + "testdb", (error, response, body) => {
             assert.equal(200, response.statusCode);
-            request.get(base_url + "testdb", (error, response, body) => {
-                assert.equal(200, response.statusCode);
-                done();
-            });
-        });
-    });
-
-    it("login has admin", (done) => {
-        request.post({
-            headers: admin_headers,
-            url: base_url + "login",
-            form: { email: 'admin@a.aa', password: '123qweASD' }
-        }, (error, response, body) => {
-            if (response.statusCode != 200) console.log(body);
-            admin_headers.Authorization = JSON.parse(body).token;
-            assert.equal(200, response.statusCode); done();
+            done();
         });
     });
 
@@ -42,7 +27,7 @@ describe("Tests", () => {
         request.post({
             headers: user_headers,
             url: base_url + "register",
-            form: { email: 'test1', password: '123QWEasd' }
+            form: { email: 'test1', password: '123QWEasd', name: "Manuel Jaquim", country_code: "PT" }
         }, (error, response, body) => {
             assert.equal(500, response.statusCode); done();
         });
@@ -51,7 +36,7 @@ describe("Tests", () => {
         request.post({
             headers: user_headers,
             url: base_url + "register",
-            form: { email: 'user@a.a', password: '123QWEasd' }
+            form: { email: 'user@a.a', password: '123QWEasd', name: "Manuel Jaquim", country_code: "PT" }
         }, (error, response, body) => {
             assert.equal(500, response.statusCode); done();
         });
@@ -60,7 +45,7 @@ describe("Tests", () => {
         request.post({
             headers: user_headers,
             url: base_url + "register",
-            form: { email: '@some.com', password: '123QWEasd' }
+            form: { email: '@some.com', password: '123QWEasd', name: "Manuel Jaquim", country_code: "PT" }
         }, (error, response, body) => {
             assert.equal(500, response.statusCode); done();
         });
@@ -69,7 +54,7 @@ describe("Tests", () => {
         request.post({
             headers: user_headers,
             url: base_url + "register",
-            form: { email: 'user@some.com', password: '' }
+            form: { email: 'user@some.com', password: '', name: "Manuel Jaquim", country_code: "PT" }
         }, (error, response, body) => {
             assert.equal(500, response.statusCode); done();
         });
@@ -78,7 +63,7 @@ describe("Tests", () => {
         request.post({
             headers: user_headers,
             url: base_url + "register",
-            form: { email: 'user@some.com', password: '12345678' }
+            form: { email: 'user@some.com', password: '12345678', name: "Manuel Jaquim", country_code: "PT" }
         }, (error, response, body) => {
             assert.equal(500, response.statusCode); done();
         });
@@ -87,7 +72,7 @@ describe("Tests", () => {
         request.post({
             headers: user_headers,
             url: base_url + "register",
-            form: { email: 'user@some.com', password: '1Qa' }
+            form: { email: 'user@some.com', password: '1Qa', name: "Manuel Jaquim", country_code: "PT" }
         }, (error, response, body) => {
             assert.equal(500, response.statusCode); done();
         });
@@ -96,7 +81,7 @@ describe("Tests", () => {
         request.post({
             headers: user_headers,
             url: base_url + "register",
-            form: { email: 'user@some.com', password: '1234QWER' }
+            form: { email: 'user@some.com', password: '1234QWER', name: "Manuel Jaquim", country_code: "PT" }
         }, (error, response, body) => {
             assert.equal(500, response.statusCode); done();
         });
@@ -105,7 +90,7 @@ describe("Tests", () => {
         request.post({
             headers: user_headers,
             url: base_url + "register",
-            form: { email: 'user@some.com', password: '123QWEasd' }
+            form: { email: 'user@some.com', password: '123QWEasd', name: "Manuel Jaquim", country_code: "PT" }
         }, (error, response, body) => {
             if (response.statusCode != 200) console.log(body);
             user_headers.Authorization = JSON.parse(body).token;
@@ -117,7 +102,7 @@ describe("Tests", () => {
         request.post({
             headers: user_headers,
             url: base_url + "register",
-            form: { email: 'user@some.com', password: '123QWEasd' }
+            form: { email: 'user@some.com', password: '123QWEasd', name: "Manuel Jaquim", country_code: "PT" }
         }, (error, response, body) => {
             assert.equal(500, response.statusCode); done();
         });
@@ -152,30 +137,20 @@ describe("Tests", () => {
             assert.equal(200, response.statusCode); done();
         });
     });
-
-    it("POST /chpass -> refuse new_password:'456RTYfgh' old_password:'123qweZXC'", (done) => {
+    it("POST /chpass -> refuse new password:'12345678", (done) => {
         request.post({
             headers: user_headers,
             url: base_url + "chpass",
-            form: { new_password: '456RTYfgh', old_password: '123qweZXC' }
+            form: { password: '12345678' }
         }, (error, response, body) => {
             assert.equal(500, response.statusCode); done();
         });
     });
-    it("POST /chpass -> refuse new_password:'12345678' old_password:'123qweASD'", (done) => {
+    it("POST /chpass -> accept new password:'123qweASD'", (done) => {
         request.post({
             headers: user_headers,
             url: base_url + "chpass",
-            form: { new_password: '12345678', old_password: '123qweASD' }
-        }, (error, response, body) => {
-            assert.equal(500, response.statusCode); done();
-        });
-    });
-    it("POST /chpass -> accept new_password:'123qweASD' old_password:'123QWEasd'", (done) => {
-        request.post({
-            headers: user_headers,
-            url: base_url + "chpass",
-            form: { new_password: '123qweASD', old_password: '123QWEasd' }
+            form: { password: '123qweASD' }
         }, (error, response, body) => {
             if (response.statusCode != 200) console.log(body);
             assert.equal(200, response.statusCode); done();

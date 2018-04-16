@@ -14,7 +14,19 @@ exports.create = (attributes) => {
 
 exports.setPublication = (ids, publication) => {
   return new Promise((resolve, reject) => {
-
+    let promises = []
+    ids.forEach(id => promises.push(new Promise((resolve, reject) => {
+      db.Tag.find().where({ '_id': id }).exec((err, tag) => {
+        if (err) reject({ code: 500, msg: err.message });
+        else tag.publications.push(publication._id).save((err, res) => {
+          if (err) reject({ code: 500, msg: err.message });
+          else resolve();
+        });
+      });
+    })));
+    Promise.all(promises).then(
+      () => resolve(),
+      err => reject());
   });
 }
 
