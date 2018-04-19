@@ -22,8 +22,7 @@ module.exports = (app) => {
           if (client) req.client = client;
           else req.client = null;
           next();
-        },
-        error => { req.client = null; next(); });
+        }, error => { req.client = null; next(); });
     } else { req.client = null; next(); }
   });
 }

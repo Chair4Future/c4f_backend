@@ -5,9 +5,11 @@ exports.create = (attributes) => {
     attributes.name = attributes.name.replace(/\b\w/g, l => l.toUpperCase());
     if (!attributes.email || /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/.test(attributes.email)) {
       if (!attributes.phone || /\+\d{9,15}$/.test(attributes.phone)) {
-        db.Department.create(attributes).then(
-          res => resolve(res),
-          err => reject({ code: 500, msg: err.message }));
+        if (attributes.company_id) {
+          db.Department.create(attributes).then(
+            res => resolve(res),
+            err => reject({ code: 500, msg: err.message }));
+        } else reject({ code: 500, msg: "Company must be defined" });
       } else reject({ code: 500, msg: "invalid phone number, must follow E.164 recommendation, this field is optional" });
     } else reject({ code: 500, msg: "invalid email, this field is optional" });
   });

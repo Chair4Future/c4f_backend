@@ -18,8 +18,8 @@ module.exports = (sequelize, DataTypes) => {
   }, { underscored: true });
 
   Company.associate = function (models) {
-    models.Company.belongsTo(models.User, { as: 'admin' });
-    models.Company.belongsTo(models.BusinessArea, { as: 'business' });
+    models.Company.belongsTo(models.User);
+    models.Company.belongsTo(models.BusinessArea);
     models.Company.hasMany(models.Department);
   };
 

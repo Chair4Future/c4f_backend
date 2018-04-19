@@ -27,8 +27,8 @@ module.exports = (sequelize, DataTypes) => {
   }, { underscored: true });
 
   Department.associate = function (models) {
-    models.Department.belongsTo(models.Company, { as: 'company' });
-    models.Department.belongsToMany(models.User, { as: 'user', through: models.DepartmentUser });
+    models.Department.belongsTo(models.Company);
+    models.Department.belongsToMany(models.User, { through: models.DepartmentUser });
   };
 
   return Department;

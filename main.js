@@ -9,57 +9,35 @@ require('dotenv').config();
 if (cluster.isMaster) {
     var db = require('./src/models/index');
     db.sequelize.sync().then(
-        () => {
-            require('./src/models/seed').seed(db).then(
-                () => {
-                    console.log('\x1b[32m%s\x1b[0m.', '(PLAIN) Connection established with MongoDB and MySQL');
+        () => require('./src/models/seed').seed(db).then(() => {
+            console.log('\x1b[32m%s\x1b[0m.', '(PLAIN) Connection established with MongoDB and MySQL');
 
-                    var cpus = require('os').cpus().length
-                    console.log('Master cluster setting up ' + cpus + ' workers...');
+            var cpus = require('os').cpus().length
+            for (var i = 0; i < cpus; i++) { cluster.fork(); }
 
-                    for (var i = 0; i < cpus; i++) {
-                        cluster.fork();
-                    }
-
-                    cluster.on('exit', function (worker, code, signal) {
-                        console.log('Worker ' + worker.process.pid + ' died with code: ' + code + ', and signal: ' + signal + '-> Starting a new worker');
-                        cluster.fork();
-                    });
-                },
-                error => {
-                    console.log('Unable to seed Databases.', error.message);
-                    process.exit(1);
-                }
-            )
+            cluster.on('exit', function (worker, code, signal) {
+                console.log('Worker ' + worker.process.pid + ' died with code: ' + code + ', and signal: ' + signal + '-> Starting a new worker');
+                cluster.fork();
+            });
         },
-        error => {
-            console.log('Unable to connect to Databases.', error);
-            process.exit(1);
-        });
+            error => { console.log('Unable to seed Databases.', error.message); process.exit(1); }
+        ), error => { console.log('Unable to connect to Databases.', error); process.exit(1); });
 } else {
     // call the packages we need
     var express = require('express'),           // call express
-        // https = require('https'),
-        // fs = require("fs"),
-        path = require('path'),
-        router = require('./src/router'),
-        middleware=require('./src/middleware');
-
+        path = require('path');
     // START THE SERVER
     // =============================================================================
     // define our app using express
     var app = express();
-
     // middleware routes
-    middleware(app);
-    // Register routes
-    router(app);
-
+    require('./src/middleware')(app);
     // Present SPA
     app.use('/', express.static(path.resolve(__dirname, 'public')));
     // Present Documentation
     app.use('/docs', express.static(path.resolve(__dirname, 'docs')));
-
+    // Register routes
+    require('./src/router')(app);
     // Define the listenning port
     var port = process.env.PORT || 3000;
     // start http server
@@ -67,7 +45,6 @@ if (cluster.isMaster) {
         // https://stackoverflow.com/questions/9781218/how-to-change-node-jss-console-font-color
         console.log('\x1b[32m%s %d\x1b[0m.', '(PLAIN) Server http listening on port', port);
     });
-
     // //set options to https
     // const options = {
     //     key: fs.readFileSync(__dirname + "/app/keys/https_key.pem"),
