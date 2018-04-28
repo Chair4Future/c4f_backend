@@ -55,9 +55,11 @@ var sequelize = new Sequelize(mysql_uri, { operatorsAliases: operatorsAliases, l
 
 const db = {
     'User': require('./mysql/user')(sequelize, Sequelize),
-    'BusinessArea': require('./mysql/business_area')(sequelize, Sequelize),
+    'Business': require('./mysql/business')(sequelize, Sequelize),
     'Company': require('./mysql/company')(sequelize, Sequelize),
     'Department': require('./mysql/department')(sequelize, Sequelize),
+    'Nearshore': require('./mysql/nearshore')(sequelize, Sequelize),
+    'Websection': require('./mysql/websection')(sequelize, Sequelize),
     'DepartmentUser': require('./mysql/department_user')(sequelize, Sequelize),
 
     'Log': require('./mongodb/log'),

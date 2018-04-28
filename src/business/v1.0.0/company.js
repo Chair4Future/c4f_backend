@@ -1,16 +1,13 @@
 var db = require('../../models/index');
 
-exports.create = (attributes, owner) => {
+exports.create = (name, business, description, owner) => {
   return new Promise((resolve, reject) => {
-    console.log("business", "ownerid"+owner.id);
-    if (attributes.name && attributes.business && owner.id) {
-      console.log("attributes");
-      attributes.name = attributes.name.replace(/\b\w/g, l => l.toUpperCase());
+    if (name && business && owner.id) {
+      name = name.replace(/\b\w/g, l => l.toUpperCase());
       db.Company.create({
-        name: attributes.name,
-        business_area_id: attributes.business,
+        name: name,
         user_id: owner.id,
-        description: attributes.description
+        description: description
       }).then(
         res => { console.log("res"); resolve(res) },
         err => reject({ code: 500, msg: err.message }));
@@ -29,11 +26,12 @@ exports.list = () => {
 exports.get = (id) => {
   return new Promise((resolve, reject) => {
     db.Company.findById(id, {
-      attributes: ['id', 'name', 'description'],
+      attributes: ['id', 'name'],
       include: [
-        { model: db.User, attributes: ['id', 'name'] },
-        { model: db.BusinessArea, attributes: ['id', 'name'] },
-        { model: db.Department, attributes: ['id', 'name', 'email', 'phone'] }
+        { model: db.Business, attributes: ['id', 'name'] },
+        { model: db.Department, attributes: ['id', 'name', 'email', 'phone'] },
+        { model: db.Nearshore, attributes: ['id', 'country_code', 'city', 'address'] },
+        { model: db.Websection, attributes: ['id', 'title', 'text', 'image', 'code'] },
       ]
     }).then(
       res => resolve(res),
@@ -46,5 +44,15 @@ exports.remove = (id) => {
     db.Company.destory({ where: { id: id } }).then(
       () => resolve(),
       err => reject({ code: 500, msg: err.message }));
+  });
+}
+
+exports.verifyOwner = (owner, id) => {
+  return new Promise((resolve, reject) => {
+    db.Company.findOne({ where: { user_id: owner.id, id: id } }).then(
+      company => {
+        if (company) resolve(company);
+        else reject({ code: 500, msg: "company not found" });
+      }, error => reject({ code: 500, msg: error.message }));
   });
 }

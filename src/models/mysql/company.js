@@ -19,8 +19,10 @@ module.exports = (sequelize, DataTypes) => {
 
   Company.associate = function (models) {
     models.Company.belongsTo(models.User);
-    models.Company.belongsTo(models.BusinessArea);
+    models.Company.belongsToMany(models.Business, { through: models.CompanyBusiness });
     models.Company.hasMany(models.Department);
+    models.Company.hasMany(models.Nearshore);
+    models.Company.hasMany(models.Websection);
   };
 
   return Company;

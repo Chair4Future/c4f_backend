@@ -1,6 +1,6 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  var BusinessArea = sequelize.define('BusinessArea', {
+  var Business = sequelize.define('Business', {
     id: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
@@ -16,9 +16,9 @@ module.exports = (sequelize, DataTypes) => {
     }
   }, { underscored: true });
 
-  BusinessArea.associate = function (models) {
-    models.BusinessArea.hasMany(models.Company);
+  Business.associate = function (models) {
+    models.Business.belongsToMany(models.Company, { through: models.CompanyBusiness });
   };
   
-  return BusinessArea;
+  return Business;
 };

@@ -40,6 +40,18 @@ module.exports = (app) => {
             "1.0.0": controllers.v1_0_0.company.get,
         }))
         /*________________________________________________
+        *__________________DEPARTMENT_____________________
+        *_________________________________________________*/
+        .post('/department', versioning({
+            "1.0.0": controllers.v1_0_0.department.create,
+        }))
+        .post('/department/:id/user', versioning({
+            "1.0.0": controllers.v1_0_0.department.addUser,
+        }))
+        .delete('/department/:id/user', versioning({
+            "1.0.0": controllers.v1_0_0.department.removeUser,
+        }))
+        /*________________________________________________
         *_____________________TRASH_______________________
         *_________________________________________________*/
         .get('/destroy', versioning({

@@ -19,7 +19,7 @@ var business = require('../../business/index').v1_0_0;
  * @apiParam {string} name valid user name
  * @apiParam {string} birthdate (optional) user birthdate
  * @apiParam {string} phone (optional) must follow E.164 recommendation
- * @apiParam {string} country_code must follow the standard ISO 3166 alpha-2
+ * @apiParam {string} country_code (optional) must follow the standard ISO 3166 alpha-2
  * @apiParam {string} photo (optional) user profile photo
  * @apiSuccess {string} token jwt valid for 8 hours and must be placed at "Authorization" header
  */
@@ -42,12 +42,13 @@ exports.register = function (req, res) {
  * @apiParam {string} email valid email
  * @apiParam {string} password must have at least one uppercase letter, one lowercase, one digit and a minimum 8 characters
  * @apiSuccess {string} token jwt valid for 8 hours and must be placed at "Authorization" header
+ * @apiSuccess {string} user user object with attributtes: id, name, email, photo, birthdate and country_code
  */
 exports.login = function (req, res) {
     business.user.login(req.body).then(
         user => {
             business.utils.createToken(user, req.connection.remoteAddress).then(
-                token => res.status(200).json({ token: token, user: user.id }),
+                token => res.status(200).json({ token: token, user: user }),
                 error => res.status(error.code).send(error.msg));
         },
         error => res.status(error.code).send(error.msg));

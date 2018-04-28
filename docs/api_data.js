@@ -459,22 +459,39 @@ define({ "api": [
             "optional": false,
             "field": "name",
             "description": "<p>valid name</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "business",
+            "description": "<p>business area id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "email",
+            "description": "<p>(optional) valid email</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "phone",
+            "description": "<p>(optional) must follow E.164 recommendation</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "description",
+            "description": "<p>(optional) company description</p>"
           }
         ]
       }
     },
     "success": {
-      "fields": {
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "type": "Object",
-            "optional": false,
-            "field": "business",
-            "description": "<p>business area created</p>"
-          }
-        ]
-      },
       "examples": [
         {
           "title": "Response example:",
@@ -548,7 +565,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Response example:",
-          "content": "{\n \"company\": [\n {\n   \"id\": \"7d9db945-d3f4-471a-a0f4-37f69c171dea\",\n   \"name\": \"International Relationships\"\n },\n]",
+          "content": "{\n \"company\": {\n   \"id\": \"01f52a4c-fc49-4a97-bbe0-c75e4679cd33\",\n   \"name\": \"IBM\",\n   \"description\": null,\n   \"User\": {\n     \"id\": \"16acf8fc-087f-4ef3-9236-83ebf42e3147\",\n     \"name\": \"8b450a269a397b04ea10c4b4586a8535\"\n   },\n   \"BusinessArea\": {\n     \"id\": \"f8ae926f-39d1-43f5-bdfa-36a2c39c894c\",\n     \"name\": \"International Relationships\"\n   },\n   \"Departments\": []\n }\n}",
           "type": "json"
         }
       ]
@@ -618,13 +635,187 @@ define({ "api": [
       "examples": [
         {
           "title": "Response example:",
-          "content": "{\n \"company\": [\n {\n   \"id\": \"7d9db945-d3f4-471a-a0f4-37f69c171dea\",\n   \"name\": \"International Relationships\"\n },\n {\n   \"id\": \"7d9db945-d3f4-471a-a0f4-37f69c171dea\",\n   \"name\": \"Software Development\"\n }\n]",
+          "content": "{\n \"company\": [\n {\n   \"id\": \"7d9db945-d3f4-471a-a0f4-37f69c171dea\",\n   \"name\": \"International Relationships\"\n },\n]",
           "type": "json"
         }
       ]
     },
     "filename": "src/controllers/v1.0.0/company.js",
     "groupTitle": "Company",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "optional": false,
+            "field": "Accept-Version",
+            "defaultValue": "1.0.0",
+            "description": ""
+          },
+          {
+            "group": "Header",
+            "optional": false,
+            "field": "Content-Type",
+            "defaultValue": "application/json",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "number",
+            "optional": false,
+            "field": "status",
+            "description": "<p>http status code: 500 to business logic errors and 401 to unauthorized</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "type": "string",
+            "optional": false,
+            "field": "error",
+            "description": "<p>error description</p>"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "post",
+    "url": "/department",
+    "title": "01) Create",
+    "group": "Department",
+    "name": "createDepartment",
+    "version": "1.0.0",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "name",
+            "description": "<p>valid name</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "email",
+            "description": "<p>(optional) valid email</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "phone",
+            "description": "<p>(optional) must follow E.164 recommendation</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "sponsor_email",
+            "description": "<p>email of the department's sponsor, must be registered</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "business",
+            "description": "<p>business area created</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Response example:",
+          "content": "{\n   \"name\": \"Instituto Baldes de Massa\",\n   \"business\": \"7d9db945-d3f4-471a-a0f4-37f69c171dea\"\n }",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "src/controllers/v1.0.0/department.js",
+    "groupTitle": "Department",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "optional": false,
+            "field": "Accept-Version",
+            "defaultValue": "1.0.0",
+            "description": ""
+          },
+          {
+            "group": "Header",
+            "optional": false,
+            "field": "Content-Type",
+            "defaultValue": "application/json",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "number",
+            "optional": false,
+            "field": "status",
+            "description": "<p>http status code: 500 to business logic errors and 401 to unauthorized</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "type": "string",
+            "optional": false,
+            "field": "error",
+            "description": "<p>error description</p>"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "get",
+    "url": "/department/:id",
+    "title": "02) Get",
+    "group": "Department",
+    "name": "getDepartment",
+    "version": "1.0.0",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "department",
+            "description": "<p>department profile</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Response example:",
+          "content": "{\n \n }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "src/controllers/v1.0.0/department.js",
+    "groupTitle": "Department",
     "header": {
       "fields": {
         "Header": [
