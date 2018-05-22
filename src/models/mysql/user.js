@@ -18,16 +18,10 @@ module.exports = (sequelize, DataTypes) => {
         msg: 'email already registered'
       }
     },
-    phone: {
-      type: DataTypes.STRING,
-      unique: {
-        args: true,
-        msg: 'phone number already registered'
-      }
-    },
     birthdate: { type: DataTypes.DATEONLY },
     photo: { type: DataTypes.STRING },
     country_code: { type: DataTypes.STRING(2) },
+    city: { type: DataTypes.STRING },
     password: {
       type: DataTypes.STRING,
       allowNull: false
@@ -48,8 +42,11 @@ module.exports = (sequelize, DataTypes) => {
     });
 
   User.associate = function (models) {
-    models.User.belongsToMany(models.Department, { as: 'department', through: models.DepartmentUser });
+    models.User.belongsToMany(models.Department, { through: models.DepartmentUser });
+    models.User.belongsToMany(models.Skill, { through: models.UserSkill });
     models.User.hasMany(models.Company);
+    models.User.hasMany(models.Experience);
+    models.User.hasMany(models.Link);
   };
 
   return User;

@@ -1,6 +1,6 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  var Business = sequelize.define('Business', {
+  var Skill = sequelize.define('Skill', {
     id: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
@@ -11,14 +11,14 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       unique: {
         args: true,
-        msg: 'business area already registered'
+        msg: 'skill already registered'
       }
     }
   }, { underscored: true });
 
-  Business.associate = function (models) {
-    models.Business.belongsToMany(models.Company, { through: "CompanyBusiness" });
+  Skill.associate = function (models) {
+    models.Skill.belongsToMany(models.User, { through: models.UserSkill });
   };
   
-  return Business;
+  return Skill;
 };

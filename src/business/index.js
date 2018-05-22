@@ -7,5 +7,8 @@ module.exports.v1_0_0 = {
     'tag': require('./v1.0.0/tag'),
     'user': require('./v1.0.0/user'),
     'utils': require('./v1.0.0/utils'),
-    'websection': require('./v1.0.0/websection')
+    'websection': require('./v1.0.0/websection'),
+    'link': require('./v1.0.0/link'),
+    'experience': require('./v1.0.0/experience'),
+    'skill': require('./v1.0.0/skill')
 };

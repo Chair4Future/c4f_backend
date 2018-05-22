@@ -3,5 +3,6 @@ module.exports.v1_0_0 = {
     'user': require('./v1.0.0/user'),
     'business': require('./v1.0.0/business'),
     'company': require('./v1.0.0/company'),
-    'department': require('./v1.0.0/department')
+    'department': require('./v1.0.0/department'),
+    'skill': require('./v1.0.0/skill')
 }

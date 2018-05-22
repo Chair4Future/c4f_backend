@@ -19,7 +19,7 @@ exports.create = (attributes, company) => {
 
 exports.remove = (id, company) => {
   return new Promise((resolve, reject) => {
-    db.Nearshore.destory({ where: { id: id, company_id: company.id } }).then(
+    db.Nearshore.destroy({ where: { id: id, company_id: company.id } }).then(
       () => resolve(),
       err => reject({ code: 500, msg: err.message }));
   });

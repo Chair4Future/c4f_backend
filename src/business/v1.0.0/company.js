@@ -1,15 +1,17 @@
 var db = require('../../models/index');
 
-exports.create = (name, business, description, owner) => {
+exports.create = (name, business, description, logo, banner, owner) => {
   return new Promise((resolve, reject) => {
-    if (name && business && owner.id) {
+    if (name && owner.id) {
       name = name.replace(/\b\w/g, l => l.toUpperCase());
       db.Company.create({
         name: name,
         user_id: owner.id,
-        description: description
+        description: description,
+        banner: banner,
+        logo: logo
       }).then(
-        res => { console.log("res"); resolve(res) },
+        res => resolve(res),
         err => reject({ code: 500, msg: err.message }));
     } else { reject({ code: 500, msg: "invalid arguments, please insert all fields" }); }
   });
@@ -39,9 +41,22 @@ exports.get = (id) => {
   });
 }
 
+exports.update = (attributes, company) => {
+  return new Promise((resolve, reject) => {
+    let to_update = {};
+    if (attributes.name) { to_update.name = name.replace(/\b\w/g, l => l.toUpperCase()); }
+    if (attributes.description) { to_update.description = attributes.description; }
+    if (attributes.banner) { to_update.banner = attributes.banner; }
+    if (attributes.logo) { to_update.logo = attributes.logo; }
+    company.update(to_update).then(
+      () => resolve(),
+      err => reject({ code: 500, msg: err.message }));
+  });
+}
+
 exports.remove = (id) => {
   return new Promise((resolve, reject) => {
-    db.Company.destory({ where: { id: id } }).then(
+    db.Company.destroy({ where: { id: id } }).then(
       () => resolve(),
       err => reject({ code: 500, msg: err.message }));
   });

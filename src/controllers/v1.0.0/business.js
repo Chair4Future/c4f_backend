@@ -31,7 +31,7 @@ var business = require('../../business/index').v1_0_0;
  */
 exports.list = function (req, res) {
   if (req.client) {
-    business.businessArea.list().then(
+    business.business.list().then(
       result => res.status(200).json({ business: result }),
       error => res.status(error.code).send(error.msg));
   } else {

@@ -51,7 +51,13 @@ exports.login = (attributes) => {
     return new Promise((resolve, reject) => {
         let encrypted = utils.encrypt([attributes.email, attributes.password]);
         if (!encrypted.err) {
-            db.User.findOne({ where: { email: encrypted.value[0], password: encrypted.value[1] } }).then(
+            db.User.findOne({
+                where: { email: encrypted.value[0], password: encrypted.value[1] }, include: [
+                    { model: db.Skill },
+                    { model: db.Experience },
+                    { model: db.Link }
+                ]
+            }).then(
                 res => {
                     if (res) {
                         resolve({
@@ -60,7 +66,10 @@ exports.login = (attributes) => {
                             email: utils.decrypt(res.email),
                             birthdate: res.birthdate,
                             photo: res.photo,
-                            country_code: res.country_code
+                            country_code: res.country_code,
+                            skill: res.Skill,
+                            experience: res.Experience,
+                            link: res.Link
                         });
                     }
                     else { reject({ code: 500, msg: "email and password don't match" }); }

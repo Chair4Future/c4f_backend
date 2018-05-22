@@ -1,7 +1,11 @@
 var crypto = require("crypto"),
   fs = require("fs"),
   jwt = require('jsonwebtoken'),
-  db = require('../../models/index');
+  path = require("path"),
+  mime = require('mime-types'),
+  multer = require('multer'),
+  db = require('../../models/index'),
+  uuidv4 = require('uuid/v4');
 
 exports.encrypt = (to_encrypt) => {
   try {
@@ -20,7 +24,7 @@ exports.decrypt = (to_decrypt) => {
   return decipher.update(to_decrypt, 'hex', 'utf8') + decipher.final('utf8');
 }
 
-exports.createToken = (user, client_address) => {
+exports.createToken = (user) => {
   return new Promise((resolve, reject) => {
     let private_key = fs.readFileSync(__dirname + '/../../keys/key.pem').toString();
     if (private_key === undefined) reject({ code: 500, msg: "error on load private key" });
@@ -30,8 +34,7 @@ exports.createToken = (user, client_address) => {
     };
     let options = {
       expiresIn: "8h",
-      algorithm: "RS256",
-      subject: client_address
+      algorithm: "RS256"
     };
     jwt.sign(payload, private_key, options, (err, token) => {
       if (err) { reject({ code: 500, msg: err.message }); }
@@ -40,14 +43,13 @@ exports.createToken = (user, client_address) => {
   });
 }
 
-exports.validateToken = (token, client_address) => {
+exports.validateToken = (token) => {
   return new Promise((resolve, reject) => {
     let public_key = fs.readFileSync(__dirname + '/../../keys/cert.pem').toString();
     if (public_key === undefined) reject("error on load public key");
 
     let options = {
-      algorithms: ["RS256"],
-      subject: client_address
+      algorithms: ["RS256"]
     };
 
     jwt.verify(token, public_key, options, (err, payload) => {
@@ -60,17 +62,64 @@ exports.validateToken = (token, client_address) => {
   });
 }
 
+exports.upload = (html_name) => {
+  return new Promise((resolve, reject) => {
+    try {
+      let obj = multer({
+        storage: multer.diskStorage(
+          {
+            destination: path.resolve(__dirname, '..', '..', '..', 'files'),
+            filename: (req, file, cb) => cb(null, uuidv4() + '.' + mime.extension(file.mimetype))
+          }
+        ),
+        fileFilter: (req, file, cb) => {
+          if (!file.originalname.match(/\.(jpg|jpeg|png|gif|pdf)$/)) return cb(new Error('Only image files are allowed!'), false);
+          cb(null, true);
+        }
+      }).single(html_name);
+      resolve(obj);
+    } catch (err) { reject({ code: 500, msg: err.message }); }
+  });
+}
+
+exports.download = (filename) => {
+  return new Promise((resolve, reject) => {
+    try {
+      let file = fs.readFileSync(path.resolve(__dirname, '..', '..', '..', 'files', filename));
+      let header = { 'Content-Type': mime.lookup(filename) }
+      resolve({ file: file, header: header });
+    } catch (err) { reject({ code: 500, msg: err.message }); }
+  });
+}
 
 // JUST TO DEVELOPMENT
 exports.deleteAll = function () {
   return new Promise((resolve, reject) => {
     db.sequelize.query('SET FOREIGN_KEY_CHECKS = 0', { raw: true }).then(() => {
       db.User.truncate().then(() => {
-        db.sequelize.query('SET FOREIGN_KEY_CHECKS = 1', { raw: true }).then(
-          () => resolve(),
-          error => reject(error));
-      });
-    }, error => reject(error));
+        db.Company.truncate().then(() => {
+          db.Business.truncate().then(() => {
+            db.Nearshore.truncate().then(() => {
+              db.Websection.truncate().then(() => {
+                db.Department.truncate().then(() => {
+                  db.DepartmentUser.truncate().then(() => {
+                    db.Publication.remove({}, () => {
+                      db.Log.remove({}, () => {
+                        db.Tag.remove({}, () => {
+                          db.sequelize.query('SET FOREIGN_KEY_CHECKS = 1', { raw: true }).then(
+                            () => resolve(),
+                            error => reject(error));
+                        });
+                      }, error => reject(error))
+                    }, error => reject(error))
+                  }, error => reject(error))
+                }, error => reject(error))
+              }, error => reject(error))
+            }, error => reject(error))
+          }, error => reject(error))
+        }, error => reject(error))
+      }, error => reject(error))
+    }, error => reject(error))
   });
 }
 

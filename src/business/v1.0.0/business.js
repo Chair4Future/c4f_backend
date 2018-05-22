@@ -3,13 +3,16 @@ var db = require('../../models/index');
 exports.addCompanyToBusiness = (name, company_id) => {
   return new Promise((resolve, reject) => {
     name = name.replace(/\b\w/g, l => l.toUpperCase());
-    db.Business.findOrCreate({ where: { name: name } }).then(
+    db.Business.findOne({ where: { name: name } }).then(
       business => {
-        if (business) {
-          business.addCompany(company_id).then(
+        if (business) business.addCompany(company_id).then(
+          res => resolve(res),
+          err => reject(err.message));
+        else db.Business.create({ name: name }).then(
+          business => business.addCompany(company_id).then(
             res => resolve(res),
-            err => reject(err.message))
-        } else reject("was not possible to define the business");
+            err => reject(err.message)),
+          err => reject(err.message));
       }, err => reject(err.message));
   });
 }
@@ -24,7 +27,7 @@ exports.list = () => {
 
 exports.remove = (id) => {
   return new Promise((resolve, reject) => {
-    db.Business.destory({ where: { id: id } }).then(
+    db.Business.destroy({ where: { id: id } }).then(
       () => resolve(),
       err => reject({ code: 500, msg: err.message }));
   });

@@ -9,8 +9,7 @@ module.exports = (app) => {
         *_____________________USERS_______________________
         *_________________________________________________*/
         .post('/register', versioning({
-            "1.0.0": controllers.v1_0_0.user.register,
-            "2.0.0": (req, res) => res.json({ error: 'invalid version' })
+            "1.0.0": controllers.v1_0_0.user.register
         }))
         .post('/login', versioning({
             "1.0.0": controllers.v1_0_0.user.login,
@@ -18,14 +17,35 @@ module.exports = (app) => {
         .post('/chpass', versioning({
             "1.0.0": controllers.v1_0_0.user.changePassword,
         }))
+        .post('/my/skill', versioning({
+            "1.0.0": controllers.v1_0_0.user.addSkill,
+        }))
+        .delete('/my/skill/:id', versioning({
+            "1.0.0": controllers.v1_0_0.user.removeSkill,
+        }))
+        .post('/my/link', versioning({
+            "1.0.0": controllers.v1_0_0.user.addLink,
+        }))
+        .delete('/my/link/:id', versioning({
+            "1.0.0": controllers.v1_0_0.user.removeLink,
+        }))
+        .post('/my/experience', versioning({
+            "1.0.0": controllers.v1_0_0.user.addExperience,
+        }))
+        .delete('/my/experience/:id', versioning({
+            "1.0.0": controllers.v1_0_0.user.removeExperience,
+        }))
         /*________________________________________________
         *___________________BUSINESS______________________
         *_________________________________________________*/
-        .post('/businessarea', versioning({
-            "1.0.0": controllers.v1_0_0.businessArea.create,
+        .get('/business', versioning({
+            "1.0.0": controllers.v1_0_0.business.list,
         }))
-        .get('/businessarea', versioning({
-            "1.0.0": controllers.v1_0_0.businessArea.list,
+        /*________________________________________________
+        *_____________________SKILL_______________________
+        *_________________________________________________*/
+        .get('/skill', versioning({
+            "1.0.0": controllers.v1_0_0.skill.list,
         }))
         /*________________________________________________
         *___________________COMPANY_______________________
@@ -39,17 +59,47 @@ module.exports = (app) => {
         .get('/company/:id', versioning({
             "1.0.0": controllers.v1_0_0.company.get,
         }))
+        .post('/company/:id/nearshore', versioning({
+            "1.0.0": controllers.v1_0_0.company.addNearshore,
+        }))
+        .delete('/company/:cid/nearshore/:nid', versioning({
+            "1.0.0": controllers.v1_0_0.company.removeNearshore,
+        }))
+        .post('/company/:id/websection', versioning({
+            "1.0.0": controllers.v1_0_0.company.addWebsection,
+        }))
+        .put('/company/:cid/websection/:wid', versioning({
+            "1.0.0": controllers.v1_0_0.company.updateWebsection,
+        }))
+        .delete('/company/:cid/websection/:wid', versioning({
+            "1.0.0": controllers.v1_0_0.company.removeWebsection,
+        }))
+        .post('/company/:id/department', versioning({
+            "1.0.0": controllers.v1_0_0.company.addDepartment,
+        }))
+        .delete('/company/:cid/department/:did', versioning({
+            "1.0.0": controllers.v1_0_0.company.removeDepartment,
+        }))
         /*________________________________________________
         *__________________DEPARTMENT_____________________
         *_________________________________________________*/
-        .post('/department', versioning({
-            "1.0.0": controllers.v1_0_0.department.create,
-        }))
         .post('/department/:id/user', versioning({
             "1.0.0": controllers.v1_0_0.department.addUser,
         }))
-        .delete('/department/:id/user', versioning({
+        .get('/department/:id/user', versioning({
+            "1.0.0": controllers.v1_0_0.department.getUsers,
+        }))
+        .delete('/department/:id/user/:uid', versioning({
             "1.0.0": controllers.v1_0_0.department.removeUser,
+        }))
+        /*________________________________________________
+        *_____________________FILES_______________________
+        *_________________________________________________*/
+        .post('/file', versioning({
+            "1.0.0": controllers.v1_0_0.manage.fileUpload
+        }))
+        .get('/file/:id', versioning({
+            "1.0.0": controllers.v1_0_0.manage.fileDownload
         }))
         /*________________________________________________
         *_____________________TRASH_______________________

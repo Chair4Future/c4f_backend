@@ -14,12 +14,20 @@ module.exports = (sequelize, DataTypes) => {
         msg: 'company name already registered'
       }
     },
+    logo: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    banner: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
     description: { type: DataTypes.STRING }
   }, { underscored: true });
 
   Company.associate = function (models) {
     models.Company.belongsTo(models.User);
-    models.Company.belongsToMany(models.Business, { through: models.CompanyBusiness });
+    models.Company.belongsToMany(models.Business, { through: "CompanyBusiness" });
     models.Company.hasMany(models.Department);
     models.Company.hasMany(models.Nearshore);
     models.Company.hasMany(models.Websection);

@@ -61,6 +61,10 @@ const db = {
     'Nearshore': require('./mysql/nearshore')(sequelize, Sequelize),
     'Websection': require('./mysql/websection')(sequelize, Sequelize),
     'DepartmentUser': require('./mysql/department_user')(sequelize, Sequelize),
+    'Experience': require('./mysql/experience')(sequelize, Sequelize),
+    'Skill': require('./mysql/skill')(sequelize, Sequelize),
+    'UserSkill': require('./mysql/user_skill')(sequelize, Sequelize),
+    'Link': require('./mysql/link')(sequelize, Sequelize),
 
     'Log': require('./mongodb/log'),
     'Publication': require('./mongodb/publication')(mongoose),

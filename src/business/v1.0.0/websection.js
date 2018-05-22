@@ -14,7 +14,7 @@ exports.create = (attributes, company) => {
   });
 }
 
-exports.update = (id, company) => {
+exports.update = (id, attributes, company) => {
   return new Promise((resolve, reject) => {
     db.Websection.findOne({ where: { id: id, company_id: company.id } }).then(
       websection => websection.update({
@@ -31,7 +31,7 @@ exports.update = (id, company) => {
 
 exports.remove = (id, company) => {
   return new Promise((resolve, reject) => {
-    db.Websection.destory({ where: { id: id, company_id: company.id } }).then(
+    db.Websection.destroy({ where: { id: id, company_id: company.id } }).then(
       () => resolve(),
       err => reject({ code: 500, msg: err.message }));
   });
