@@ -42,7 +42,52 @@ exports.register = function (req, res) {
  * @apiParam {string} email valid email
  * @apiParam {string} password must have at least one uppercase letter, one lowercase, one digit and a minimum 8 characters
  * @apiSuccess {string} token jwt valid for 8 hours and must be placed at "Authorization" header
- * @apiSuccess {string} user user object with attributtes: id, name, email, photo, birthdate and country_code
+ * @apiSuccess {string} user 
+ * @apiSuccessExample {json} response example:
+ * {
+    "token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjU2NGZkODNkLWQ2NTItNDI5YS04OWM4LTJjNjJhOWY2ZTRjOSIsImlhdCI6MTUyNzE4NzA5MywiZXhwIjoxNTI3MjE1ODkzfQ.cGRV9PGLdfXgMfTlFjbeOhaPiC_n7F1Xn_2bcy2T7MpctQcNkCf8w2jBbgWMRoCQU1xj_SR4r68hvXUPGy-nqETEEPg4_yJnyxAaoLejSjhxokMtwM0yWWu-8bgR9J4J4MVxCmduX8gGW06UgRv7g7avXqWJBHV5HeOvmuVqps60-Kt5kxiZ2w93bRkpG3edp-1xH3alJokKLSnxBGcrM3ZzbnZbhoAMtKktvnfVLv-I14SbKSgrhPWMAWgRl3fHVuq3FphglwlqUu7WAYHTmGkHV6aa8z_aalZpcynr_-2PiESk2C0Ketij70A4-xJ23mQAMwMytoCpey3Lp9zBgg",
+    "user": {
+        "id": "564fd83d-d652-429a-89c8-2c62a9f6e4c9",
+        "name": "user1",
+        "email": "user@a.aa",
+        "birthdate": "2018-07-23T05:15:27.000Z",
+        "photo": "564fd83d-d652-429a-99f0-b7b39197091f.png",
+        "country_code": "PT",
+        "city": "Leiria",
+        "skills": [
+            {
+                "id": "69d4b004-e2e0-438f-99f0-b7b39197091f",
+                "name": "java",
+                "level": 5
+            }
+        ],
+        "experience": [
+            {
+                "institution": "Minimal Software",
+                "function": "Team Leader",
+                "actual": true,
+                "initDate": "2018-02-28",
+                "endDate": null,
+                "description": "some work description and responsabilities",
+                "is_education": false
+            }
+        ],
+        "links": [
+            {
+                "id": "69d4b004-e2e0-438f-99f0-b7b39197091f",
+                "url": "https://somesocialnetwork.com/myprofile",
+                "social": 3
+            }
+        ],
+        "companies": [
+            {
+                "id": "69d4b004-e2e0-438f-99f0-b7b39197091f",
+                "name": "Some company",
+                "logo": "564fd83d-d652-429a-99f0-b7b39197091f.png"
+            }
+        ]
+    }
+}
  */
 exports.login = function (req, res) {
     business.user.login(req.body).then(

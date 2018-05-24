@@ -51,7 +51,7 @@ exports.list = function (req, res) {
     "company": [
         {
             "id": "69d4b004-e2e0-438f-99f0-b7b39197091f",
-            "name": "IBM",
+            "name": "Some company",
             "logo": null
         }
     ]

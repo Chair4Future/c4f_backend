@@ -124,10 +124,17 @@
             "type": "string",
             "optional": false,
             "field": "user",
-            "description": "<p>user object with attributtes: id, name, email, photo, birthdate and country_code</p>"
+            "description": ""
           }
         ]
-      }
+      },
+      "examples": [
+        {
+          "title": "response example:",
+          "content": "{\n    \"token\": \"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjU2NGZkODNkLWQ2NTItNDI5YS04OWM4LTJjNjJhOWY2ZTRjOSIsImlhdCI6MTUyNzE4NzA5MywiZXhwIjoxNTI3MjE1ODkzfQ.cGRV9PGLdfXgMfTlFjbeOhaPiC_n7F1Xn_2bcy2T7MpctQcNkCf8w2jBbgWMRoCQU1xj_SR4r68hvXUPGy-nqETEEPg4_yJnyxAaoLejSjhxokMtwM0yWWu-8bgR9J4J4MVxCmduX8gGW06UgRv7g7avXqWJBHV5HeOvmuVqps60-Kt5kxiZ2w93bRkpG3edp-1xH3alJokKLSnxBGcrM3ZzbnZbhoAMtKktvnfVLv-I14SbKSgrhPWMAWgRl3fHVuq3FphglwlqUu7WAYHTmGkHV6aa8z_aalZpcynr_-2PiESk2C0Ketij70A4-xJ23mQAMwMytoCpey3Lp9zBgg\",\n    \"user\": {\n        \"id\": \"564fd83d-d652-429a-89c8-2c62a9f6e4c9\",\n        \"name\": \"user1\",\n        \"email\": \"user@a.aa\",\n        \"birthdate\": \"2018-07-23T05:15:27.000Z\",\n        \"photo\": \"564fd83d-d652-429a-99f0-b7b39197091f.png\",\n        \"country_code\": \"PT\",\n        \"city\": \"Leiria\",\n        \"skills\": [\n            {\n                \"id\": \"69d4b004-e2e0-438f-99f0-b7b39197091f\",\n                \"name\": \"java\",\n                \"level\": 5\n            }\n        ],\n        \"experience\": [\n            {\n                \"institution\": \"Minimal Software\",\n                \"function\": \"Team Leader\",\n                \"actual\": true,\n                \"initDate\": \"2018-02-28\",\n                \"endDate\": null,\n                \"description\": \"some work description and responsabilities\",\n                \"is_education\": false\n            }\n        ],\n        \"links\": [\n            {\n                \"id\": \"69d4b004-e2e0-438f-99f0-b7b39197091f\",\n                \"url\": \"https://somesocialnetwork.com/myprofile\",\n                \"social\": 3\n            }\n        ],\n        \"companies\": [\n            {\n                \"id\": \"69d4b004-e2e0-438f-99f0-b7b39197091f\",\n                \"name\": \"Some company\",\n                \"logo\": \"564fd83d-d652-429a-99f0-b7b39197091f.png\"\n            }\n        ]\n    }\n}",
+          "type": "json"
+        }
+      ]
     },
     "filename": "src/controllers/v1.0.0/user.js",
     "groupTitle": "Authentication",
@@ -312,7 +319,77 @@
       "examples": [
         {
           "title": "Response example:",
-          "content": "{\n \"business\": [\n {\n   \"id\": \"7d9db945-d3f4-471a-a0f4-37f69c171dea\",\n   \"name\": \"International Relationships\"\n },\n {\n   \"id\": \"7d9db945-d3f4-471a-a0f4-37f69c171dea\",\n   \"name\": \"Software Development\"\n }\n]",
+          "content": "{\n \"business\": [\n {\n   \"id\": \"7d9db945-d3f4-471a-a0f4-37f69c171dea\",\n   \"name\": \"International Relationships\"\n },\n {\n   \"id\": \"7d9db945-d3f4-471a-a0f4-37f69c171dea\",\n   \"name\": \"Software Development\"\n }\n]}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "src/controllers/v1.0.0/business.js",
+    "groupTitle": "Business",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "optional": false,
+            "field": "Accept-Version",
+            "defaultValue": "1.0.0",
+            "description": ""
+          },
+          {
+            "group": "Header",
+            "optional": false,
+            "field": "Content-Type",
+            "defaultValue": "application/json",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "number",
+            "optional": false,
+            "field": "status",
+            "description": "<p>http status code: 500 to business logic errors and 401 to unauthorized</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "type": "string",
+            "optional": false,
+            "field": "error",
+            "description": "<p>error description</p>"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "get",
+    "url": "/business/:id/company",
+    "title": "02) List Companies",
+    "group": "Business",
+    "name": "listBusinessCompanies",
+    "version": "1.0.0",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "company",
+            "description": "<p>companies list</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Response example:",
+          "content": "{\n    \"company\": [\n        {\n            \"id\": \"69d4b004-e2e0-438f-99f0-b7b39197091f\",\n            \"name\": \"Some company\",\n            \"logo\": null\n        }\n    ]\n  }",
           "type": "json"
         }
       ]
@@ -791,76 +868,6 @@
     }
   },
   {
-    "type": "get",
-    "url": "/company/:id",
-    "title": "03) Get",
-    "group": "Company",
-    "name": "getCompany",
-    "version": "1.0.0",
-    "success": {
-      "fields": {
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "type": "Object",
-            "optional": false,
-            "field": "company",
-            "description": "<p>company profile</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Response example:",
-          "content": "{\n \"company\": {\n   \"id\": \"01f52a4c-fc49-4a97-bbe0-c75e4679cd33\",\n   \"name\": \"IBM\",\n   \"description\": null,\n   \"User\": {\n     \"id\": \"16acf8fc-087f-4ef3-9236-83ebf42e3147\",\n     \"name\": \"8b450a269a397b04ea10c4b4586a8535\"\n   },\n   \"BusinessArea\": [\n     {\n       \"id\": \"f8ae926f-39d1-43f5-bdfa-36a2c39c894c\",\n       \"name\": \"International Relationships\"\n     }\n   ],\n   \"Departments\": [],\n   \"Nearshores\": [],\n   \"Websections\": []\n }\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "filename": "src/controllers/v1.0.0/company.js",
-    "groupTitle": "Company",
-    "header": {
-      "fields": {
-        "Header": [
-          {
-            "group": "Header",
-            "optional": false,
-            "field": "Accept-Version",
-            "defaultValue": "1.0.0",
-            "description": ""
-          },
-          {
-            "group": "Header",
-            "optional": false,
-            "field": "Content-Type",
-            "defaultValue": "application/json",
-            "description": ""
-          }
-        ]
-      }
-    },
-    "error": {
-      "fields": {
-        "Error 4xx": [
-          {
-            "group": "Error 4xx",
-            "type": "number",
-            "optional": false,
-            "field": "status",
-            "description": "<p>http status code: 500 to business logic errors and 401 to unauthorized</p>"
-          },
-          {
-            "group": "Error 4xx",
-            "type": "string",
-            "optional": false,
-            "field": "error",
-            "description": "<p>error description</p>"
-          }
-        ]
-      }
-    }
-  },
-  {
     "type": "put",
     "url": "/company/:id",
     "title": "04) Update",
@@ -913,6 +920,76 @@
           }
         ]
       }
+    },
+    "filename": "src/controllers/v1.0.0/company.js",
+    "groupTitle": "Company",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "optional": false,
+            "field": "Accept-Version",
+            "defaultValue": "1.0.0",
+            "description": ""
+          },
+          {
+            "group": "Header",
+            "optional": false,
+            "field": "Content-Type",
+            "defaultValue": "application/json",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "number",
+            "optional": false,
+            "field": "status",
+            "description": "<p>http status code: 500 to business logic errors and 401 to unauthorized</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "type": "string",
+            "optional": false,
+            "field": "error",
+            "description": "<p>error description</p>"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "get",
+    "url": "/company/:id",
+    "title": "03) Get",
+    "group": "Company",
+    "name": "getCompany",
+    "version": "1.0.0",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "company",
+            "description": "<p>company profile</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Response example:",
+          "content": "{\n \"company\": {\n   \"id\": \"01f52a4c-fc49-4a97-bbe0-c75e4679cd33\",\n   \"name\": \"IBM\",\n   \"logo\": \"e9be456d-23cd-4997-8dd6-408e6b1fec86.jpg\",\n      \"banner\": \"e9be456d-23cd-4997-8dd6-408e6b1fec86.jpg\",\n   \"BusinessArea\": [\n     {\n       \"id\": \"f8ae926f-39d1-43f5-bdfa-36a2c39c894c\",\n       \"name\": \"International Relationships\"\n     }\n   ],\n   \"Departments\": [],\n   \"Nearshores\": [],\n   \"Websections\": []\n }\n}",
+          "type": "json"
+        }
+      ]
     },
     "filename": "src/controllers/v1.0.0/company.js",
     "groupTitle": "Company",
@@ -1092,8 +1169,8 @@
   },
   {
     "type": "delete",
-    "url": "/company/:cid/websection/:wid",
-    "title": "09) Remove websection",
+    "url": "/company/:cid/nearshore/:nid",
+    "title": "06) Remove nearshore",
     "group": "Company",
     "name": "removeNearshore",
     "version": "1.0.0",
@@ -1155,8 +1232,8 @@
   },
   {
     "type": "delete",
-    "url": "/company/:cid/nearshore/:nid",
-    "title": "06) Remove nearshore",
+    "url": "/company/:cid/websection/:wid",
+    "title": "09) Remove websection",
     "group": "Company",
     "name": "removeNearshore",
     "version": "1.0.0",
