@@ -4,7 +4,7 @@ module.exports = (app) => {
   var bodyParser = require('body-parser'),
     utils = require('./business/index').v1_0_0.utils;
 
-  app.use(bodyParser.urlencoded({ extended: true }));
+  app.use(bodyParser.urlencoded({ extended: true, limit:'5mb' }));
   app.use(bodyParser.json());
   app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");

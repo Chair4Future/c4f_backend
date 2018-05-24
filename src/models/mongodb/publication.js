@@ -21,7 +21,7 @@ module.exports = (mongoose) => {
       type: Number,
       default: 0
     },
-    dislikes: {
+    views: {
       type: Number,
       default: 0
     },

@@ -41,6 +41,9 @@ module.exports = (app) => {
         .get('/business', versioning({
             "1.0.0": controllers.v1_0_0.business.list,
         }))
+        .get('/business/:id/company', versioning({
+            "1.0.0": controllers.v1_0_0.business.getCompanies,
+        }))
         /*________________________________________________
         *_____________________SKILL_______________________
         *_________________________________________________*/

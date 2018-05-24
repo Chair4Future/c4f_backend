@@ -71,11 +71,8 @@ exports.list = function (req, res) {
  *  "company": {
  *    "id": "01f52a4c-fc49-4a97-bbe0-c75e4679cd33",
  *    "name": "IBM",
- *    "description": null,
- *    "User": {
- *      "id": "16acf8fc-087f-4ef3-9236-83ebf42e3147",
- *      "name": "8b450a269a397b04ea10c4b4586a8535"
- *    },
+ *    "logo": "e9be456d-23cd-4997-8dd6-408e6b1fec86.jpg",
+      "banner": "e9be456d-23cd-4997-8dd6-408e6b1fec86.jpg",
  *    "BusinessArea": [
  *      {
  *        "id": "f8ae926f-39d1-43f5-bdfa-36a2c39c894c",

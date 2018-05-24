@@ -73,7 +73,7 @@ exports.upload = (html_name) => {
           }
         ),
         fileFilter: (req, file, cb) => {
-          if (!file.originalname.match(/\.(jpg|jpeg|png|gif|pdf)$/)) return cb(new Error('Only image files are allowed!'), false);
+          if (!file.originalname.match(/\.(jpg|jpeg|png|gif|pdf|svg)$/)) return cb(new Error('Only image files are allowed!'), false);
           cb(null, true);
         }
       }).single(html_name);

@@ -32,3 +32,13 @@ exports.remove = (id) => {
       err => reject({ code: 500, msg: err.message }));
   });
 }
+
+exports.getCompanies = (id) => {
+  return new Promise((resolve, reject) => {
+    db.Business.findById(id, { include: [{ model: db.Company, attributes: ['id', 'name', 'logo'] }] }).then(
+      res => {
+        resolve(res.Companies.map(element => { return { id: element.id, name: element.name, logo: element.logo } }));
+      },
+      err => reject({ code: 500, msg: err.message }));
+  });
+}

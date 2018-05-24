@@ -33,7 +33,6 @@ exports.create = function (req, res) {
         Promise.all(getTags).then(
           tags => business.publication.create(req.body, req.client, company.user_id === req.client.id).then(
             publication => {
-              console.log(tags);
               let setTags = tags.map(tag => { return business.tag.setPublication(tag, publication) });
               Promise.all(setTags).then(
                 () => res.status(200).json({ publication: publication }),

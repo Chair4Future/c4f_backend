@@ -28,7 +28,7 @@ exports.list = () => {
 exports.get = (id) => {
   return new Promise((resolve, reject) => {
     db.Company.findById(id, {
-      attributes: ['id', 'name'],
+      attributes: ['id', 'name', 'logo', 'banner'],
       include: [
         { model: db.Business, attributes: ['id', 'name'] },
         { model: db.Department, attributes: ['id', 'name', 'email', 'phone'] },

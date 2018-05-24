@@ -36,7 +36,12 @@ exports.login = (attributes) => {
                 where: { email: encrypted.value[0], password: encrypted.value[1] }, include: [
                     { model: db.Skill },
                     { model: db.Experience },
-                    { model: db.Link }
+                    { model: db.Link },
+                    {
+                        model: db.Department, include: [
+                            { model: db.Company, attributes: ["id", "name", "logo"] }
+                        ]
+                    }
                 ]
             }).then(
                 res => {
@@ -59,7 +64,8 @@ exports.login = (attributes) => {
                                 }
                             }),
                             experience: res.Experiences,
-                            links: res.Links
+                            links: res.Links,
+                            companies: res.Departments.map(el => el.Company)
                         });
                     }
                     else { reject({ code: 500, msg: "email and password don't match" }); }
