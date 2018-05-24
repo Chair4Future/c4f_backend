@@ -71,3 +71,18 @@ exports.verifyOwner = (owner, id) => {
       }, error => reject({ code: 500, msg: error.message }));
   });
 }
+
+exports.verifyCollaborator = (collaborator, id) => {
+  return new Promise((resolve, reject) => {
+    db.Company.findById(id, {
+      include: [
+        { model: db.Department, include: [{ model: db.User, where: { id: collaborator.id } }] },
+        { model: db.Business }
+      ]
+    }).then(
+      company => {
+        if (company.Departments.length > 0) resolve(company);
+        else reject({ code: 401, msg: "Unauthorized" });
+      }, error => reject({ code: 500, msg: error.message }));
+  });
+}

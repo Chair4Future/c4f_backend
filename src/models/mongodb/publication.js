@@ -14,6 +14,7 @@ module.exports = (mongoose) => {
     detailed_image: { type: String },
     datetime: {
       type: Date,
+      required: true,
       default: Date.now()
     },
     likes: {
@@ -31,6 +32,11 @@ module.exports = (mongoose) => {
     sender: {
       type: String,
       required: true
+    },
+    approved:{
+      type: Boolean,
+      required: true,
+      default: false
     }
   }, { versionKey: false });
 

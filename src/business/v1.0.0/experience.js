@@ -28,7 +28,10 @@ exports.create = (attributes, user) => {
 exports.remove = (id, current_user) => {
   return new Promise((resolve, reject) => {
     db.Experience.destroy({ where: { id: id, user_id: current_user.id } }).then(
-      () => resolve(),
+      result => {
+        if (result > 0) resolve()
+        else reject({ code: 401, msg: "Unauthorized" });
+      },
       err => reject({ code: 500, msg: err.message }));
   });
 }

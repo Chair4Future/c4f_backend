@@ -44,11 +44,23 @@ exports.fileDownload = (req, res) => {
     }
 }
 
+
+
 exports.destroyAll = function (req, res) {
     business.utils.deleteAll().then(
         () => res.status(200).json({ success: true }),
         error => res.status(500).send(error.msg)
     );
+}
+
+exports.verifyUser = function (req, res) {
+    if (req.client) {
+        business.company.verifyCollaborator(req.client, req.params.id).then(
+            result => res.status(200).json({ success: result }),
+            error => res.status(500).send(error.msg));
+    } else {
+        res.status(401).send("Unauthorized");
+    }
 }
 
 exports.testDb = function (req, res) {

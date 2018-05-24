@@ -83,7 +83,12 @@ exports.changePassword = function (req, res) {
  * @apiHeader Authorization="< token >"
  * @apiParam {string} url personal profile
  * @apiParam {integer} social social network array index
- * @apiSuccess {boolean} result return true if was sucessfuly updated
+ * @apiParamExample {json} request example:
+ * {
+   "url": "https://www.linkedin.com/in/admin-example-1a8a44144/",
+   "social":2
+    }
+ * @apiSuccess {object} link return the created link with id
  */
 exports.addLink = function (req, res) {
     if (req.client) {
@@ -129,7 +134,17 @@ exports.removeLink = function (req, res) {
    @apiParam {date} endDate end function date,
    @apiParam {string} description function description,
    @apiParam {boolean} is_education
- * @apiSuccess {boolean} result return true if was sucessfuly updated
+   @apiParamExample {json} request example:
+   {
+    "institution": "Minimal Software",
+    "function": "Team Leader",
+    "actual": true,
+    "initDate": "2018-02-28",
+    "endDate": null,
+    "description": "some work description and responsabilities",
+    "is_education": false
+    }
+ * @apiSuccess {object} experience return the created experience with id
  */
 exports.addExperience = function (req, res) {
     if (req.client) {
@@ -149,7 +164,7 @@ exports.addExperience = function (req, res) {
  * @apiUse auth
  * @apiHeader Authorization="< token >"
  * @apiParam {string} :id experience id to remove
- * @apiSuccess {boolean} result return true if was sucessfuly removed
+ * @apiSuccess {object} result return true if was sucessfuly removed
  */
 exports.removeExperience = function (req, res) {
     if (req.client) {
@@ -170,7 +185,12 @@ exports.removeExperience = function (req, res) {
  * @apiHeader Authorization="< token >"
  * @apiParam {string} name skill/tecnology name
  * @apiParam {integer} level skill level, (1-5)
- * @apiSuccess {boolean} result return true if was sucessfuly updated
+ * @apiParamExample {json} request example:
+ * {
+    "name": "NodeJS",
+    "level": "3"
+    }
+ * @apiSuccess {object} skill return the create skill with id
  */
 exports.addSkill = function (req, res) {
     if (req.client) {
@@ -194,7 +214,7 @@ exports.addSkill = function (req, res) {
  */
 exports.removeSkill = function (req, res) {
     if (req.client) {
-        business.skill.remove(req.params.id, req.client).then(
+        business.skill.removeSkillFromUser(req.params.id, req.client.id).then(
             () => res.status(200).json({ result: true }),
             error => res.status(error.code).send(error.msg));
     } else {

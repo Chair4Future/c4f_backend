@@ -1092,8 +1092,8 @@
   },
   {
     "type": "delete",
-    "url": "/company/:cid/nearshore/:nid",
-    "title": "06) Remove nearshore",
+    "url": "/company/:cid/websection/:wid",
+    "title": "09) Remove websection",
     "group": "Company",
     "name": "removeNearshore",
     "version": "1.0.0",
@@ -1155,8 +1155,8 @@
   },
   {
     "type": "delete",
-    "url": "/company/:cid/websection/:wid",
-    "title": "09) Remove websection",
+    "url": "/company/:cid/nearshore/:nid",
+    "title": "06) Remove nearshore",
     "group": "Company",
     "name": "removeNearshore",
     "version": "1.0.0",
@@ -1709,6 +1709,449 @@
     }
   },
   {
+    "type": "put",
+    "url": "/publication/:id/authorize",
+    "title": "03) Authorize publication",
+    "group": "Publication",
+    "name": "authorizePublication",
+    "version": "1.0.0",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": ":id",
+            "description": "<p>publication id</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "boolean",
+            "optional": false,
+            "field": "result",
+            "description": "<p>returns true if was successfuly authorized</p>"
+          }
+        ]
+      }
+    },
+    "filename": "src/controllers/v1.0.0/publication.js",
+    "groupTitle": "Publication",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "optional": false,
+            "field": "Accept-Version",
+            "defaultValue": "1.0.0",
+            "description": ""
+          },
+          {
+            "group": "Header",
+            "optional": false,
+            "field": "Content-Type",
+            "defaultValue": "application/json",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "number",
+            "optional": false,
+            "field": "status",
+            "description": "<p>http status code: 500 to business logic errors and 401 to unauthorized</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "type": "string",
+            "optional": false,
+            "field": "error",
+            "description": "<p>error description</p>"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "post",
+    "url": "/publication",
+    "title": "01) Create",
+    "group": "Publication",
+    "name": "createPublication",
+    "version": "1.0.0",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "title",
+            "description": "<p>publication title</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "resume",
+            "description": "<p>(optional) publication resume to feed</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "text",
+            "description": "<p>publication full description</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "brand_image",
+            "description": "<p>(optional) image filename to brand image</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "detailed_image",
+            "description": "<p>(optional) image filename to details</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "company_id",
+            "description": "<p>related company id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "array",
+            "optional": false,
+            "field": "tag[]",
+            "description": "<p>tags names</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Response example:",
+          "content": "{\n    \"title\":\"Publication title\",\n    \"resume\":\"Vestibulum a elit eu nisl feugiat tempus. Aliquam maximus ut velit sit amet consequat. Donec ut consequat dolor. Aliquam cursus quis ipsum a vestibulum. Fusce auctor posuere tempus. Donec sagittis congue ullamcorper.\",\n    \"text\":\"Ut non felis et ipsum faucibus gravida non vel felis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Aliquam ex nibh, sollicitudin sit amet est in, tempus accumsan urna. Duis ipsum est, eleifend eu sapien in, vehicula accumsan lectus. In eu tellus malesuada, elementum lectus id, rhoncus magna. Nam eu sapien id neque ornare suscipit. Quisque laoreet nunc a pellentesque tincidunt. Ut lacinia, nunc et ultricies lacinia, tellus mi pretium orci, et accumsan mauris leo ut mi. Proin suscipit, ipsum id blandit placerat, dolor sapien laoreet ex, vel iaculis risus ex sed dui. Nunc sed felis vel metus cursus sollicitudin ac quis tellus. Nam vulputate fringilla quam, id porta turpis placerat vel. Nam tristique neque at felis mattis, ut aliquet ligula ultricies. Proin ante purus, aliquet vitae nibh vitae, sollicitudin aliquet ex. Cras et tortor tellus.\",\n    \"brand_image\":\"69d4b004-e2e0-438f-99f0-b7b39197091f.jpg\",\n    \"detailed_image\":\"b96fc30e-16da-4463-96af-d9fed68a0da9.png\",\n    \"company_id\":\"69d4b004-e2e0-438f-99f0-b7b39197091f\",\n    \"tag\":[\"hightech\", \".net\"]\n  }",
+          "type": "Object"
+        }
+      ]
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "json",
+            "optional": false,
+            "field": "publication",
+            "description": "<p>created publication</p>"
+          }
+        ]
+      }
+    },
+    "filename": "src/controllers/v1.0.0/publication.js",
+    "groupTitle": "Publication",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "optional": false,
+            "field": "Accept-Version",
+            "defaultValue": "1.0.0",
+            "description": ""
+          },
+          {
+            "group": "Header",
+            "optional": false,
+            "field": "Content-Type",
+            "defaultValue": "application/json",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "number",
+            "optional": false,
+            "field": "status",
+            "description": "<p>http status code: 500 to business logic errors and 401 to unauthorized</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "type": "string",
+            "optional": false,
+            "field": "error",
+            "description": "<p>error description</p>"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "get",
+    "url": "/publication/company/:id",
+    "title": "03) List by company",
+    "group": "Publication",
+    "name": "listPublicationsByCompany",
+    "version": "1.0.0",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": ":id",
+            "description": "<p>company id</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "object",
+            "optional": false,
+            "field": "company",
+            "description": "<p>created company</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Response example:",
+          "content": "{\n    \"publication\": [\n        {\n            \"datetime\": \"2018-05-24T17:02:41.834Z\",\n            \"likes\": 0,\n            \"dislikes\": 0,\n            \"approved\": true,\n            \"_id\": \"5b06f033c432f1310d6633ba\",\n            \"title\": \"Publication title\",\n            \"resume\": \"Vestibulum a elit eu nisl feugiat tempus. Aliquam maximus ut velit sit amet consequat. Donec ut consequat dolor. Aliquam cursus quis ipsum a vestibulum. Fusce auctor posuere tempus. Donec sagittis congue ullamcorper.\",\n            \"text\": \"Ut non felis et ipsum faucibus gravida non vel felis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Aliquam ex nibh, sollicitudin sit amet est in, tempus accumsan urna. Duis ipsum est, eleifend eu sapien in, vehicula accumsan lectus. In eu tellus malesuada, elementum lectus id, rhoncus magna. Nam eu sapien id neque ornare suscipit. Quisque laoreet nunc a pellentesque tincidunt. Ut lacinia, nunc et ultricies lacinia, tellus mi pretium orci, et accumsan mauris leo ut mi. Proin suscipit, ipsum id blandit placerat, dolor sapien laoreet ex, vel iaculis risus ex sed dui. Nunc sed felis vel metus cursus sollicitudin ac quis tellus. Nam vulputate fringilla quam, id porta turpis placerat vel. Nam tristique neque at felis mattis, ut aliquet ligula ultricies. Proin ante purus, aliquet vitae nibh vitae, sollicitudin aliquet ex. Cras et tortor tellus.\",\n            \"brand_image\": \"69d4b004-e2e0-438f-99f0-b7b39197091f.jpg\",\n            \"detailed_image\": \"b96fc30e-16da-4463-96af-d9fed68a0da9.png\",\n            \"sender\": \"f52273ea-f05f-4d3b-ac57-a974060526b7\",\n            \"company\": \"69d4b004-e2e0-438f-99f0-b7b39197091f\"\n        }\n    ]\n  }",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "src/controllers/v1.0.0/publication.js",
+    "groupTitle": "Publication",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "optional": false,
+            "field": "Accept-Version",
+            "defaultValue": "1.0.0",
+            "description": ""
+          },
+          {
+            "group": "Header",
+            "optional": false,
+            "field": "Content-Type",
+            "defaultValue": "application/json",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "number",
+            "optional": false,
+            "field": "status",
+            "description": "<p>http status code: 500 to business logic errors and 401 to unauthorized</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "type": "string",
+            "optional": false,
+            "field": "error",
+            "description": "<p>error description</p>"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "get",
+    "url": "/publication/tag/:id",
+    "title": "02) List by tag",
+    "group": "Publication",
+    "name": "listPublicationsByTag",
+    "version": "1.0.0",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": ":id",
+            "description": "<p>tag id</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "object",
+            "optional": false,
+            "field": "company",
+            "description": "<p>created company</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Response example:",
+          "content": "{\n    \"publication\": [\n        {\n            \"datetime\": \"2018-05-24T17:02:41.834Z\",\n            \"likes\": 0,\n            \"dislikes\": 0,\n            \"approved\": true,\n            \"_id\": \"5b06f033c432f1310d6633ba\",\n            \"title\": \"Publication title\",\n            \"resume\": \"Vestibulum a elit eu nisl feugiat tempus. Aliquam maximus ut velit sit amet consequat. Donec ut consequat dolor. Aliquam cursus quis ipsum a vestibulum. Fusce auctor posuere tempus. Donec sagittis congue ullamcorper.\",\n            \"text\": \"Ut non felis et ipsum faucibus gravida non vel felis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Aliquam ex nibh, sollicitudin sit amet est in, tempus accumsan urna. Duis ipsum est, eleifend eu sapien in, vehicula accumsan lectus. In eu tellus malesuada, elementum lectus id, rhoncus magna. Nam eu sapien id neque ornare suscipit. Quisque laoreet nunc a pellentesque tincidunt. Ut lacinia, nunc et ultricies lacinia, tellus mi pretium orci, et accumsan mauris leo ut mi. Proin suscipit, ipsum id blandit placerat, dolor sapien laoreet ex, vel iaculis risus ex sed dui. Nunc sed felis vel metus cursus sollicitudin ac quis tellus. Nam vulputate fringilla quam, id porta turpis placerat vel. Nam tristique neque at felis mattis, ut aliquet ligula ultricies. Proin ante purus, aliquet vitae nibh vitae, sollicitudin aliquet ex. Cras et tortor tellus.\",\n            \"brand_image\": \"69d4b004-e2e0-438f-99f0-b7b39197091f.jpg\",\n            \"detailed_image\": \"b96fc30e-16da-4463-96af-d9fed68a0da9.png\",\n            \"sender\": \"f52273ea-f05f-4d3b-ac57-a974060526b7\",\n            \"company\": \"69d4b004-e2e0-438f-99f0-b7b39197091f\"\n        }\n    ]\n  }",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "src/controllers/v1.0.0/publication.js",
+    "groupTitle": "Publication",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "optional": false,
+            "field": "Accept-Version",
+            "defaultValue": "1.0.0",
+            "description": ""
+          },
+          {
+            "group": "Header",
+            "optional": false,
+            "field": "Content-Type",
+            "defaultValue": "application/json",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "number",
+            "optional": false,
+            "field": "status",
+            "description": "<p>http status code: 500 to business logic errors and 401 to unauthorized</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "type": "string",
+            "optional": false,
+            "field": "error",
+            "description": "<p>error description</p>"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "delete",
+    "url": "/publication/:id",
+    "title": "04) Remove publication",
+    "group": "Publication",
+    "name": "removePublication",
+    "version": "1.0.0",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": ":id",
+            "description": "<p>publication id</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "boolean",
+            "optional": false,
+            "field": "result",
+            "description": "<p>returns true if was successfuly removed</p>"
+          }
+        ]
+      }
+    },
+    "filename": "src/controllers/v1.0.0/publication.js",
+    "groupTitle": "Publication",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "optional": false,
+            "field": "Accept-Version",
+            "defaultValue": "1.0.0",
+            "description": ""
+          },
+          {
+            "group": "Header",
+            "optional": false,
+            "field": "Content-Type",
+            "defaultValue": "application/json",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "number",
+            "optional": false,
+            "field": "status",
+            "description": "<p>http status code: 500 to business logic errors and 401 to unauthorized</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "type": "string",
+            "optional": false,
+            "field": "error",
+            "description": "<p>error description</p>"
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "get",
     "url": "/skill",
     "title": "01) List",
@@ -1730,13 +2173,83 @@
       "examples": [
         {
           "title": "Response example:",
-          "content": "{\n \"skill\": [\n]",
+          "content": "{\n    \"skill\": [\n        {\n            \"id\": \"c6db7ebc-aebb-4977-b0cd-8cf0c4c7d7df\",\n            \"name\": \"NodeJS\"\n        }\n    ]\n  }",
           "type": "json"
         }
       ]
     },
     "filename": "src/controllers/v1.0.0/skill.js",
     "groupTitle": "Skill",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "optional": false,
+            "field": "Accept-Version",
+            "defaultValue": "1.0.0",
+            "description": ""
+          },
+          {
+            "group": "Header",
+            "optional": false,
+            "field": "Content-Type",
+            "defaultValue": "application/json",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "number",
+            "optional": false,
+            "field": "status",
+            "description": "<p>http status code: 500 to business logic errors and 401 to unauthorized</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "type": "string",
+            "optional": false,
+            "field": "error",
+            "description": "<p>error description</p>"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "get",
+    "url": "/tag",
+    "title": "01) List",
+    "group": "Tag",
+    "name": "listTag",
+    "version": "1.0.0",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "tag",
+            "description": "<p>tags list</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Response example:",
+          "content": "{\n    \"tag\": [\n        {\n            \"id\": \"c6db7ebc-aebb-4977-b0cd-8cf0c4c7d7df\",\n            \"name\": \"NodeJS\"\n        }\n    ]\n  }",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "src/controllers/v1.0.0/tag.js",
+    "groupTitle": "Tag",
     "header": {
       "fields": {
         "Header": [
@@ -1865,17 +2378,24 @@
             "description": ""
           }
         ]
-      }
+      },
+      "examples": [
+        {
+          "title": "request example:",
+          "content": "{\n \"institution\": \"Minimal Software\",\n \"function\": \"Team Leader\",\n \"actual\": true,\n \"initDate\": \"2018-02-28\",\n \"endDate\": null,\n \"description\": \"some work description and responsabilities\",\n \"is_education\": false\n }",
+          "type": "json"
+        }
+      ]
     },
     "success": {
       "fields": {
         "Success 200": [
           {
             "group": "Success 200",
-            "type": "boolean",
+            "type": "object",
             "optional": false,
-            "field": "result",
-            "description": "<p>return true if was sucessfuly updated</p>"
+            "field": "experience",
+            "description": "<p>return the created experience with id</p>"
           }
         ]
       }
@@ -1955,17 +2475,24 @@
             "description": "<p>social network array index</p>"
           }
         ]
-      }
+      },
+      "examples": [
+        {
+          "title": "request example:",
+          "content": "{\n   \"url\": \"https://www.linkedin.com/in/admin-example-1a8a44144/\",\n   \"social\":2\n    }",
+          "type": "json"
+        }
+      ]
     },
     "success": {
       "fields": {
         "Success 200": [
           {
             "group": "Success 200",
-            "type": "boolean",
+            "type": "object",
             "optional": false,
-            "field": "result",
-            "description": "<p>return true if was sucessfuly updated</p>"
+            "field": "link",
+            "description": "<p>return the created link with id</p>"
           }
         ]
       }
@@ -2045,17 +2572,24 @@
             "description": "<p>skill level, (1-5)</p>"
           }
         ]
-      }
+      },
+      "examples": [
+        {
+          "title": "request example:",
+          "content": "{\n    \"name\": \"NodeJS\",\n    \"level\": \"3\"\n    }",
+          "type": "json"
+        }
+      ]
     },
     "success": {
       "fields": {
         "Success 200": [
           {
             "group": "Success 200",
-            "type": "boolean",
+            "type": "object",
             "optional": false,
-            "field": "result",
-            "description": "<p>return true if was sucessfuly updated</p>"
+            "field": "skill",
+            "description": "<p>return the create skill with id</p>"
           }
         ]
       }
@@ -2135,7 +2669,7 @@
         "Success 200": [
           {
             "group": "Success 200",
-            "type": "boolean",
+            "type": "object",
             "optional": false,
             "field": "result",
             "description": "<p>return true if was sucessfuly removed</p>"

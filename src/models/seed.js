@@ -10,9 +10,9 @@ module.exports.seed = (db) => {
           if (!encrypted.error) {
 
             db.User.bulkCreate([
-              { "email": encrypted.value[0], "is_admin": true, "is_moderator": true, "password": encrypted.value[3], name: encrypted.value[4], country_code: "PT" },
-              { "email": encrypted.value[1], "password": encrypted.value[3], name: encrypted.value[5], country_code: "PT" },
-              { "email": encrypted.value[2], "password": encrypted.value[3], name: encrypted.value[6], country_code: "PT" }
+              { "email": encrypted.value[0], "is_admin": true, "is_moderator": true, "password": encrypted.value[3], name: encrypted.value[4], country_code: "PT", city:"Tomar" },
+              { "email": encrypted.value[1], "password": encrypted.value[3], name: encrypted.value[5], country_code: "PT", city:"Leiria" },
+              { "email": encrypted.value[2], "password": encrypted.value[3], name: encrypted.value[6], country_code: "PT", city:"Torres Novas" }
             ]).then(
               () => resolve(),
               error => reject(error));

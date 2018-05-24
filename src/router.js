@@ -48,6 +48,12 @@ module.exports = (app) => {
             "1.0.0": controllers.v1_0_0.skill.list,
         }))
         /*________________________________________________
+        *______________________TAG________________________
+        *_________________________________________________*/
+        .get('/tag', versioning({
+            "1.0.0": controllers.v1_0_0.tag.list,
+        }))
+        /*________________________________________________
         *___________________COMPANY_______________________
         *_________________________________________________*/
         .post('/company', versioning({
@@ -102,6 +108,24 @@ module.exports = (app) => {
             "1.0.0": controllers.v1_0_0.manage.fileDownload
         }))
         /*________________________________________________
+        *_________________PUBLICATION_____________________
+        *_________________________________________________*/
+        .post('/publication', versioning({
+            "1.0.0": controllers.v1_0_0.publication.create,
+        }))
+        .get('/publication/company/:id', versioning({
+            "1.0.0": controllers.v1_0_0.publication.listByCompany,
+        }))
+        .get('/publication/tag/:id', versioning({
+            "1.0.0": controllers.v1_0_0.publication.listByTag,
+        }))
+        .put('/publication/:id/authorize', versioning({
+            "1.0.0": controllers.v1_0_0.publication.authorize,
+        }))
+        .delete('/publication/:id', versioning({
+            "1.0.0": controllers.v1_0_0.publication.remove,
+        }))
+        /*________________________________________________
         *_____________________TRASH_______________________
         *_________________________________________________*/
         .get('/destroy', versioning({
@@ -109,6 +133,9 @@ module.exports = (app) => {
         }))
         .get('/testdb', versioning({
             "1.0.0": controllers.v1_0_0.manage.testDb
+        }))
+        .get('/company/:id/verifyuser', versioning({
+            "1.0.0": controllers.v1_0_0.manage.verifyUser
         }))
 
 

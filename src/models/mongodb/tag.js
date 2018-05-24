@@ -5,19 +5,14 @@ module.exports = (mongoose) => {
       type: String,
       required: true
     },
-    likes: {
+    usage: {
       type: Number,
-      default: 0
-    },
-    dislikes: {
-      type: Number,
-      default: 0
+      default: 1
     },
     rating: {
       type: Number,
-      default: 0
+      default: 1
     },
-    business: { type: String },
     publications: [{
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Publication'
