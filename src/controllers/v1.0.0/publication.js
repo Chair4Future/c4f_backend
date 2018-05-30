@@ -29,16 +29,22 @@ exports.create = function (req, res) {
   if (req.client) {
     business.company.verifyCollaborator(req.client, req.body.company_id).then(
       company => {
-        let getTags = req.body.tag.map(element => { return business.tag.findOrCreate(element) });
-        Promise.all(getTags).then(
-          tags => business.publication.create(req.body, req.client, company.user_id === req.client.id).then(
-            publication => {
-              let setTags = tags.map(tag => { return business.tag.setPublication(tag, publication) });
-              Promise.all(setTags).then(
-                () => res.status(200).json({ publication: publication }),
-                error => res.status(500).send(error));
-            }, error => res.status(error.code).send(error.msg)),
-          error => res.status(500).send(error))
+        if (req.body.tag && req.body.tag.length > 0) {
+          let getTags = req.body.tag.map(element => { return business.tag.findOrCreate(element) });
+          Promise.all(getTags).then(
+            tags => business.publication.create(req.body, req.client, company.user_id === req.client.id).then(
+              publication => {
+                let setTags = tags.map(tag => { return business.tag.setPublication(tag, publication) });
+                Promise.all(setTags).then(
+                  () => res.status(200).json({ publication: publication }),
+                  error => res.status(500).send(error));
+              }, error => res.status(error.code).send(error.msg)),
+            error => res.status(500).send(error));
+        } else {
+          business.publication.create(req.body, req.client, company.user_id === req.client.id).then(
+            publication => res.status(200).json({ publication: publication }),
+            error => res.status(500).send(error));
+        }
       }, error => res.status(error.code).send(error.msg));
   } else {
     res.status(401).send("Unauthorized");
