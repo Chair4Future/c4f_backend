@@ -131,7 +131,7 @@
       "examples": [
         {
           "title": "response example:",
-          "content": "{\n    \"token\": \"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjU2NGZkODNkLWQ2NTItNDI5YS04OWM4LTJjNjJhOWY2ZTRjOSIsImlhdCI6MTUyNzE4NzA5MywiZXhwIjoxNTI3MjE1ODkzfQ.cGRV9PGLdfXgMfTlFjbeOhaPiC_n7F1Xn_2bcy2T7MpctQcNkCf8w2jBbgWMRoCQU1xj_SR4r68hvXUPGy-nqETEEPg4_yJnyxAaoLejSjhxokMtwM0yWWu-8bgR9J4J4MVxCmduX8gGW06UgRv7g7avXqWJBHV5HeOvmuVqps60-Kt5kxiZ2w93bRkpG3edp-1xH3alJokKLSnxBGcrM3ZzbnZbhoAMtKktvnfVLv-I14SbKSgrhPWMAWgRl3fHVuq3FphglwlqUu7WAYHTmGkHV6aa8z_aalZpcynr_-2PiESk2C0Ketij70A4-xJ23mQAMwMytoCpey3Lp9zBgg\",\n    \"user\": {\n        \"id\": \"564fd83d-d652-429a-89c8-2c62a9f6e4c9\",\n        \"name\": \"user1\",\n        \"email\": \"user@a.aa\",\n        \"birthdate\": \"2018-07-23T05:15:27.000Z\",\n        \"photo\": \"564fd83d-d652-429a-99f0-b7b39197091f.png\",\n        \"country_code\": \"PT\",\n        \"city\": \"Leiria\",\n        \"skills\": [\n            {\n                \"id\": \"69d4b004-e2e0-438f-99f0-b7b39197091f\",\n                \"name\": \"java\",\n                \"level\": 5\n            }\n        ],\n        \"experience\": [\n            {\n                \"institution\": \"Minimal Software\",\n                \"function\": \"Team Leader\",\n                \"actual\": true,\n                \"initDate\": \"2018-02-28\",\n                \"endDate\": null,\n                \"description\": \"some work description and responsabilities\",\n                \"is_education\": false\n            }\n        ],\n        \"links\": [\n            {\n                \"id\": \"69d4b004-e2e0-438f-99f0-b7b39197091f\",\n                \"url\": \"https://somesocialnetwork.com/myprofile\",\n                \"social\": 3\n            }\n        ],\n        \"companies\": [\n            {\n                \"id\": \"69d4b004-e2e0-438f-99f0-b7b39197091f\",\n                \"name\": \"Some company\",\n                \"logo\": \"564fd83d-d652-429a-99f0-b7b39197091f.png\"\n            }\n        ]\n    }\n}",
+          "content": "{\n    \"token\": \"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjU2NGZkODNkLWQ2NTItNDI5YS04OWM4LTJjNjJhOWY2ZTRjOSIsImlhdCI6MTUyNzE4NzA5MywiZXhwIjoxNTI3MjE1ODkzfQ.cGRV9PGLdfXgMfTlFjbeOhaPiC_n7F1Xn_2bcy2T7MpctQcNkCf8w2jBbgWMRoCQU1xj_SR4r68hvXUPGy-nqETEEPg4_yJnyxAaoLejSjhxokMtwM0yWWu-8bgR9J4J4MVxCmduX8gGW06UgRv7g7avXqWJBHV5HeOvmuVqps60-Kt5kxiZ2w93bRkpG3edp-1xH3alJokKLSnxBGcrM3ZzbnZbhoAMtKktvnfVLv-I14SbKSgrhPWMAWgRl3fHVuq3FphglwlqUu7WAYHTmGkHV6aa8z_aalZpcynr_-2PiESk2C0Ketij70A4-xJ23mQAMwMytoCpey3Lp9zBgg\",\n    \"user\": {\n        \"id\": \"564fd83d-d652-429a-89c8-2c62a9f6e4c9\",\n        \"name\": \"user1\",\n        \"email\": \"user@a.aa\",\n        \"birthdate\": \"2018-07-23T05:15:27.000Z\",\n        \"photo\": \"564fd83d-d652-429a-99f0-b7b39197091f.png\",\n        \"country_code\": \"PT\",\n        \"city\": \"Leiria\",\n        \"description\": \"Some description about me\"\n        \"skills\": [\n            {\n                \"id\": \"69d4b004-e2e0-438f-99f0-b7b39197091f\",\n                \"name\": \"java\",\n                \"level\": 5\n            }\n        ],\n        \"experience\": [\n            {\n                \"institution\": \"Minimal Software\",\n                \"function\": \"Team Leader\",\n                \"actual\": true,\n                \"initDate\": \"2018-02-28\",\n                \"endDate\": null,\n                \"description\": \"some work description and responsabilities\",\n                \"is_education\": false\n            }\n        ],\n        \"links\": [\n            {\n                \"id\": \"69d4b004-e2e0-438f-99f0-b7b39197091f\",\n                \"url\": \"https://somesocialnetwork.com/myprofile\",\n                \"social\": 3\n            }\n        ],\n        \"companies\": [\n            {\n                \"id\": \"69d4b004-e2e0-438f-99f0-b7b39197091f\",\n                \"name\": \"Some company\",\n                \"logo\": \"564fd83d-d652-429a-99f0-b7b39197091f.png\"\n            }\n        ]\n    }\n}",
           "type": "json"
         }
       ]
@@ -221,8 +221,8 @@
             "group": "Parameter",
             "type": "string",
             "optional": false,
-            "field": "phone",
-            "description": "<p>(optional) must follow E.164 recommendation</p>"
+            "field": "city",
+            "description": "<p>(optional) user living city</p>"
           },
           {
             "group": "Parameter",
@@ -237,6 +237,13 @@
             "optional": false,
             "field": "photo",
             "description": "<p>(optional) user profile photo</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "description",
+            "description": "<p>(optional) user description</p>"
           }
         ]
       }
@@ -800,6 +807,13 @@
             "optional": false,
             "field": "banner",
             "description": "<p>(optional) banner filename</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "collaborators",
+            "description": "<p>(optional) number of collaborators</p>"
           }
         ]
       },
@@ -904,6 +918,13 @@
             "optional": false,
             "field": "banner",
             "description": "<p>(optional) banner filename</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "collaborators",
+            "description": "<p>(optional) number of collaborators</p>"
           }
         ]
       }
@@ -986,7 +1007,7 @@
       "examples": [
         {
           "title": "Response example:",
-          "content": "{\n \"company\": {\n   \"id\": \"01f52a4c-fc49-4a97-bbe0-c75e4679cd33\",\n   \"name\": \"IBM\",\n   \"logo\": \"e9be456d-23cd-4997-8dd6-408e6b1fec86.jpg\",\n      \"banner\": \"e9be456d-23cd-4997-8dd6-408e6b1fec86.jpg\",\n   \"BusinessArea\": [\n     {\n       \"id\": \"f8ae926f-39d1-43f5-bdfa-36a2c39c894c\",\n       \"name\": \"International Relationships\"\n     }\n   ],\n   \"Departments\": [],\n   \"Nearshores\": [],\n   \"Websections\": []\n }\n}",
+          "content": "{\n \"company\": {\n   \"id\": \"01f52a4c-fc49-4a97-bbe0-c75e4679cd33\",\n   \"name\": \"IBM\",\n   \"logo\": \"e9be456d-23cd-4997-8dd6-408e6b1fec86.jpg\",\n      \"banner\": \"e9be456d-23cd-4997-8dd6-408e6b1fec86.jpg\",\n      \"collaborators\": \"123\",\n   \"BusinessArea\": [\n     {\n       \"id\": \"f8ae926f-39d1-43f5-bdfa-36a2c39c894c\",\n       \"name\": \"International Relationships\"\n     }\n   ],\n   \"Departments\": [],\n   \"Nearshores\": [],\n   \"Websections\": []\n }\n}",
           "type": "json"
         }
       ]
