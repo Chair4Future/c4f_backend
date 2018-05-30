@@ -18,9 +18,10 @@ var business = require('../../business/index').v1_0_0;
  * @apiParam {string} password must have at least one uppercase letter, one lowercase, one digit and a minimum 8 characters
  * @apiParam {string} name valid user name
  * @apiParam {string} birthdate (optional) user birthdate
- * @apiParam {string} phone (optional) must follow E.164 recommendation
+ * @apiParam {string} city (optional) user living city
  * @apiParam {string} country_code (optional) must follow the standard ISO 3166 alpha-2
  * @apiParam {string} photo (optional) user profile photo
+ * @apiParam {string} description (optional) user description
  * @apiSuccess {string} token jwt valid for 8 hours and must be placed at "Authorization" header
  */
 exports.register = function (req, res) {
@@ -54,6 +55,7 @@ exports.register = function (req, res) {
         "photo": "564fd83d-d652-429a-99f0-b7b39197091f.png",
         "country_code": "PT",
         "city": "Leiria",
+        "description": "Some description about me"
         "skills": [
             {
                 "id": "69d4b004-e2e0-438f-99f0-b7b39197091f",

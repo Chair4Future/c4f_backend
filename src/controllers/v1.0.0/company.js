@@ -13,6 +13,7 @@ var business = require('../../business/index').v1_0_0;
  * @apiParam {string} description (optional) company description
  * @apiParam {string} logo (optional) logo filename
  * @apiParam {string} banner (optional) banner filename
+ * @apiParam {string} collaborators (optional) number of collaborators
  * @apiParamExample {Object} Response example:
  * {
  *    "name": "Instituto Baldes de Massa",
@@ -22,7 +23,7 @@ var business = require('../../business/index').v1_0_0;
  */
 exports.create = function (req, res) {
   if (req.client) {
-    business.company.create(req.body.name, req.body.business, req.body.description, req.body.banner, req.body.logo, req.client).then(
+    business.company.create(req.body, req.client).then(
       company => {
         let addBusiness = req.body.business.map(element => { return business.business.addCompanyToBusiness(element, company.id) });
         Promise.all(addBusiness).then(
@@ -73,6 +74,7 @@ exports.list = function (req, res) {
  *    "name": "IBM",
  *    "logo": "e9be456d-23cd-4997-8dd6-408e6b1fec86.jpg",
       "banner": "e9be456d-23cd-4997-8dd6-408e6b1fec86.jpg",
+      "collaborators": "123",
  *    "BusinessArea": [
  *      {
  *        "id": "f8ae926f-39d1-43f5-bdfa-36a2c39c894c",
@@ -101,6 +103,7 @@ exports.get = function (req, res) {
  * @apiParam {string} description (optional) company description
  * @apiParam {string} logo (optional) logo filename
  * @apiParam {string} banner (optional) banner filename
+ * @apiParam {string} collaborators (optional) number of collaborators
  * @apiSuccess {boolean} result returns false if was successfuly updated
  */
 exports.update = (req, res) => {

@@ -6,19 +6,17 @@ exports.create = (name, email, phone, company_id, sponsors) => {
       if (company_id) {
         if (!email || /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/.test(email)) {
           if (!phone || /^[0-9]{9,15}$/.test(phone)) {
-            if (company_id) {
-              name = name.replace(/\b\w/g, l => l.toUpperCase());
-              db.Department.create({
-                name: name,
-                company_id: company_id,
-                email: email,
-                phone: phone
-              }).then(
-                department => department.addUsers(sponsors, { through: { is_sponsor: true } }).then(
-                  () => resolve(department),
-                  err => reject({ code: 500, msg: err.message })),
-                err => reject({ code: 500, msg: err.message }));
-            } else reject({ code: 500, msg: "Company must be defined" });
+            name = name.replace(/\b\w/g, l => l.toUpperCase());
+            db.Department.create({
+              name: name,
+              company_id: company_id,
+              email: email,
+              phone: phone
+            }).then(
+              department => department.addUsers(sponsors, { through: { is_sponsor: true } }).then(
+                () => resolve(department),
+                err => reject({ code: 500, msg: err.message })),
+              err => reject({ code: 500, msg: err.message }));
           } else reject({ code: 500, msg: "invalid phone number, must follow E.164 recommendation, this field is optional" });
         } else reject({ code: 500, msg: "invalid email, this field is optional" });
       } else reject({ code: 500, msg: "Company must be defined" });

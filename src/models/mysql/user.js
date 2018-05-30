@@ -33,7 +33,8 @@ module.exports = (sequelize, DataTypes) => {
     is_moderator: {
       type: DataTypes.BOOLEAN,
       defaultValue: false
-    }
+    },
+    description: { type: DataTypes.STRING }
   }, {
       scopes: {
         profile: { attributes: { exclude: ['password', 'is_mod', 'is_adm'] } }

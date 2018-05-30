@@ -1,15 +1,16 @@
 var db = require('../../models/index');
 
-exports.create = (name, business, description, logo, banner, owner) => {
+exports.create = (attributes, owner) => {
   return new Promise((resolve, reject) => {
     if (name && owner.id) {
-      name = name.replace(/\b\w/g, l => l.toUpperCase());
+      let name = attributes.name.replace(/\b\w/g, l => l.toUpperCase());
       db.Company.create({
         name: name,
         user_id: owner.id,
-        description: description,
-        banner: banner,
-        logo: logo
+        description: attributes.description,
+        banner: attributes.banner,
+        logo: attributes.logo,
+        collaborators: attributes.collaborators
       }).then(
         res => resolve(res),
         err => reject({ code: 500, msg: err.message }));
@@ -28,7 +29,7 @@ exports.list = () => {
 exports.get = (id) => {
   return new Promise((resolve, reject) => {
     db.Company.findById(id, {
-      attributes: ['id', 'name', 'logo', 'banner'],
+      attributes: ['id', 'name', 'logo', 'banner', 'collaborators'],
       include: [
         { model: db.Business, attributes: ['id', 'name'] },
         { model: db.Department, attributes: ['id', 'name', 'email', 'phone'] },
@@ -48,6 +49,7 @@ exports.update = (attributes, company) => {
     if (attributes.description) { to_update.description = attributes.description; }
     if (attributes.banner) { to_update.banner = attributes.banner; }
     if (attributes.logo) { to_update.logo = attributes.logo; }
+    if (attributes.collaborators) { to_update.collaborators = attributes.collaborators; }
     company.update(to_update).then(
       () => resolve(),
       err => reject({ code: 500, msg: err.message }));
