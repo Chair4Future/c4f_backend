@@ -20,7 +20,7 @@ exports.create = (attributes, owner) => {
 
 exports.list = () => {
   return new Promise((resolve, reject) => {
-    db.Company.findAll({ attributes: ['id', 'name'] }).then(
+    db.Company.findAll({ attributes: ['id', 'name', 'logo'] }).then(
       res => resolve(res),
       err => reject({ code: 500, msg: err.message }));
   });

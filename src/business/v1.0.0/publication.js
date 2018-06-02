@@ -31,7 +31,6 @@ exports.listByCompany = (id, is_owner) => {
         resolve(res);
       });
     }
-
   });
 }
 
@@ -39,7 +38,33 @@ exports.listAll = () => {
   return new Promise((resolve, reject) => {
     db.Publication.find().where({ 'approved': true }).exec((err, res) => {
       if (err) reject({ code: 500, msg: err.message });
-      resolve(res);
+      let promises = res.map(publication => {
+        return new Promise((resolve, reject) => {
+          db.Company.findById(publication.company).then(
+            company => {
+              if (company) resolve({
+                "datetime": publication.datetime,
+                "likes": publication.likes,
+                "dislikes": publication.dislikes,
+                "approved": publication.approved,
+                "_id": publication._id,
+                "title": publication.title,
+                "resume": publication.resume,
+                "text": publication.text,
+                "brand_image": publication.brand_image,
+                "detailed_image": publication.detailed_image,
+                "sender": publication.sender,
+                "company_id": company.id,
+                "company_name": company.name,
+                "company_logo": company.logo,
+              });
+              else resolve();
+            }, err => resolve());
+        });
+      });
+      Promise.all(promises).then(
+        res => resolve(res.filter(x => { return x != null })),
+        err => reject({ code: 500, msg: "Cannot get the company from the publication" }));
     });
   });
 }

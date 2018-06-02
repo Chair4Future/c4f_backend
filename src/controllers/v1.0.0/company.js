@@ -50,7 +50,8 @@ exports.create = function (req, res) {
  *  "company": [
  *  {
  *    "id": "7d9db945-d3f4-471a-a0f4-37f69c171dea",
- *    "name": "International Relationships"
+ *    "name": "International Relationships",
+ *    "logo": "e9be456d-23cd-4997-8dd6-408e6b1fec86.jpg"
  *  },
  * ]
  */

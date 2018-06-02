@@ -10,8 +10,14 @@ module.exports = (mongoose) => {
       type: String,
       required: true
     },
-    brand_image: { type: String },
-    detailed_image: { type: String },
+    brand_image: { 
+      type: String,
+      default: null
+    },
+    detailed_image: { 
+      type: String,
+      default: null
+    },
     datetime: {
       type: Date,
       required: true,

@@ -73,7 +73,9 @@ exports.create = function (req, res) {
             "brand_image": "69d4b004-e2e0-438f-99f0-b7b39197091f.jpg",
             "detailed_image": "b96fc30e-16da-4463-96af-d9fed68a0da9.png",
             "sender": "f52273ea-f05f-4d3b-ac57-a974060526b7",
-            "company": "69d4b004-e2e0-438f-99f0-b7b39197091f"
+            "company_id": "0a9f8e01-88f4-4809-a4b9-15f4399b22bb",
+            "company_name": "Instituto Baldes De Massa 2",
+            "company_logo": "b96fc30e-16da-4463-96af-d9fed68a0da9.png"
         }
     ]
   }
@@ -111,7 +113,9 @@ exports.listAll = function (req, res) {
             "brand_image": "69d4b004-e2e0-438f-99f0-b7b39197091f.jpg",
             "detailed_image": "b96fc30e-16da-4463-96af-d9fed68a0da9.png",
             "sender": "f52273ea-f05f-4d3b-ac57-a974060526b7",
-            "company": "69d4b004-e2e0-438f-99f0-b7b39197091f"
+            "company_id": "0a9f8e01-88f4-4809-a4b9-15f4399b22bb",
+            "company_name": "Instituto Baldes De Massa 2",
+            "company_logo": "b96fc30e-16da-4463-96af-d9fed68a0da9.png"
         }
     ]
   }
