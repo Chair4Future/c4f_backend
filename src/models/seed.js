@@ -6,13 +6,12 @@ module.exports.seed = (db) => {
     db.User.count({ where: { is_admin: true } }).then(
       count => {
         if (count < 1) {
-          let encrypted = utils.encrypt(["admin@a.aa", "user1@a.aa", "user2@a.aa", "123qweASD", "admin", "user1", "user2"]);
+          let encrypted = utils.encrypt(["123qweASD", "admin@c4f.pt", "Administrator", "user@c4f.pt", "User"]);
           if (!encrypted.error) {
 
             db.User.bulkCreate([
-              { "email": encrypted.value[0], "is_admin": true, "is_moderator": true, "password": encrypted.value[3], name: encrypted.value[4], country_code: "PT", city:"Tomar" },
-              { "email": encrypted.value[1], "password": encrypted.value[3], name: encrypted.value[5], country_code: "PT", city:"Leiria" },
-              { "email": encrypted.value[2], "password": encrypted.value[3], name: encrypted.value[6], country_code: "PT", city:"Torres Novas" }
+              { "email": encrypted.value[1], "is_admin": true, "is_moderator": true, "password": encrypted.value[0], name: encrypted.value[2], country_code: "PT", city: "Tomar" },
+              { "email": encrypted.value[3], "password": encrypted.value[0], name: encrypted.value[4], country_code: "PT", city: "Leiria" },
             ]).then(
               () => resolve(),
               error => reject(error));
