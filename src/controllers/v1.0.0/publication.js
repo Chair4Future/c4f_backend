@@ -52,13 +52,50 @@ exports.create = function (req, res) {
 }
 
 /**
- * @api {get} /publication/tag/:id 02) List by tag
+ * @api {get} /publication/all 02) List all
+ * @apiGroup Publication
+ * @apiName listAllPublication
+ * @apiVersion 1.0.0
+ * @apiUse base
+ * @apiSuccess {object} publication publications list
+ * @apiSuccessExample {json} Response example:
+ * {
+    "publication": [
+        {
+            "datetime": "2018-05-24T17:02:41.834Z",
+            "likes": 0,
+            "dislikes": 0,
+            "approved": true,
+            "_id": "5b06f033c432f1310d6633ba",
+            "title": "Publication title",
+            "resume": "Vestibulum a elit eu nisl feugiat tempus. Aliquam maximus ut velit sit amet consequat. Donec ut consequat dolor. Aliquam cursus quis ipsum a vestibulum. Fusce auctor posuere tempus. Donec sagittis congue ullamcorper.",
+            "text": "Ut non felis et ipsum faucibus gravida non vel felis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Aliquam ex nibh, sollicitudin sit amet est in, tempus accumsan urna. Duis ipsum est, eleifend eu sapien in, vehicula accumsan lectus. In eu tellus malesuada, elementum lectus id, rhoncus magna. Nam eu sapien id neque ornare suscipit. Quisque laoreet nunc a pellentesque tincidunt. Ut lacinia, nunc et ultricies lacinia, tellus mi pretium orci, et accumsan mauris leo ut mi. Proin suscipit, ipsum id blandit placerat, dolor sapien laoreet ex, vel iaculis risus ex sed dui. Nunc sed felis vel metus cursus sollicitudin ac quis tellus. Nam vulputate fringilla quam, id porta turpis placerat vel. Nam tristique neque at felis mattis, ut aliquet ligula ultricies. Proin ante purus, aliquet vitae nibh vitae, sollicitudin aliquet ex. Cras et tortor tellus.",
+            "brand_image": "69d4b004-e2e0-438f-99f0-b7b39197091f.jpg",
+            "detailed_image": "b96fc30e-16da-4463-96af-d9fed68a0da9.png",
+            "sender": "f52273ea-f05f-4d3b-ac57-a974060526b7",
+            "company": "69d4b004-e2e0-438f-99f0-b7b39197091f"
+        }
+    ]
+  }
+ */
+exports.listAll = function (req, res) {
+  if (req.client) {
+    business.publication.listAll().then(
+      publications => res.status(200).json({ publication: publications }),
+      error => res.status(error.code).send(error.msg));
+  } else {
+    res.status(401).send("Unauthorized");
+  }
+}
+
+/**
+ * @api {get} /publication/tag/:id 03) List by tag
  * @apiGroup Publication
  * @apiName listPublicationsByTag
  * @apiVersion 1.0.0
  * @apiUse base
  * @apiParam {string} :id tag id
- * @apiSuccess {object} company created company
+ * @apiSuccess {object} publication publications list by tag
  * @apiSuccessExample {json} Response example:
  * {
     "publication": [
@@ -90,13 +127,13 @@ exports.listByTag = function (req, res) {
 }
 
 /**
- * @api {get} /publication/company/:id 03) List by company
+ * @api {get} /publication/company/:id 04) List by company
  * @apiGroup Publication
  * @apiName listPublicationsByCompany
  * @apiVersion 1.0.0
  * @apiUse base
  * @apiParam {string} :id company id
- * @apiSuccess {object} company created company
+ * @apiSuccess {object} publication publications list by company
  * @apiSuccessExample {json} Response example:
  * {
     "publication": [
@@ -132,7 +169,7 @@ exports.listByCompany = function (req, res) {
 }
 
 /**
- * @api {put} /publication/:id/authorize 03) Authorize publication
+ * @api {put} /publication/:id/authorize 05) Authorize publication
  * @apiGroup Publication
  * @apiName authorizePublication
  * @apiVersion 1.0.0
@@ -155,7 +192,7 @@ exports.authorize = function (req, res) {
 }
 
 /**
- * @api {delete} /publication/:id 04) Remove publication
+ * @api {delete} /publication/:id 06) Remove publication
  * @apiGroup Publication
  * @apiName removePublication
  * @apiVersion 1.0.0

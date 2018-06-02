@@ -35,6 +35,15 @@ exports.listByCompany = (id, is_owner) => {
   });
 }
 
+exports.listAll = () => {
+  return new Promise((resolve, reject) => {
+    db.Publication.find().where({ 'approved': true }).exec((err, res) => {
+      if (err) reject({ code: 500, msg: err.message });
+      resolve(res);
+    });
+  });
+}
+
 exports.findById = (id) => {
   return new Promise((resolve, reject) => {
     db.Publication.findOne({ '_id': id }).exec((err, res) => {

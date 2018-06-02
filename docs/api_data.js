@@ -1809,7 +1809,7 @@ define({ "api": [
   {
     "type": "put",
     "url": "/publication/:id/authorize",
-    "title": "03) Authorize publication",
+    "title": "05) Authorize publication",
     "group": "Publication",
     "name": "authorizePublication",
     "version": "1.0.0",
@@ -2009,8 +2009,78 @@ define({ "api": [
   },
   {
     "type": "get",
+    "url": "/publication/all",
+    "title": "02) List all",
+    "group": "Publication",
+    "name": "listAllPublication",
+    "version": "1.0.0",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "object",
+            "optional": false,
+            "field": "publication",
+            "description": "<p>publications list</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Response example:",
+          "content": "{\n    \"publication\": [\n        {\n            \"datetime\": \"2018-05-24T17:02:41.834Z\",\n            \"likes\": 0,\n            \"dislikes\": 0,\n            \"approved\": true,\n            \"_id\": \"5b06f033c432f1310d6633ba\",\n            \"title\": \"Publication title\",\n            \"resume\": \"Vestibulum a elit eu nisl feugiat tempus. Aliquam maximus ut velit sit amet consequat. Donec ut consequat dolor. Aliquam cursus quis ipsum a vestibulum. Fusce auctor posuere tempus. Donec sagittis congue ullamcorper.\",\n            \"text\": \"Ut non felis et ipsum faucibus gravida non vel felis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Aliquam ex nibh, sollicitudin sit amet est in, tempus accumsan urna. Duis ipsum est, eleifend eu sapien in, vehicula accumsan lectus. In eu tellus malesuada, elementum lectus id, rhoncus magna. Nam eu sapien id neque ornare suscipit. Quisque laoreet nunc a pellentesque tincidunt. Ut lacinia, nunc et ultricies lacinia, tellus mi pretium orci, et accumsan mauris leo ut mi. Proin suscipit, ipsum id blandit placerat, dolor sapien laoreet ex, vel iaculis risus ex sed dui. Nunc sed felis vel metus cursus sollicitudin ac quis tellus. Nam vulputate fringilla quam, id porta turpis placerat vel. Nam tristique neque at felis mattis, ut aliquet ligula ultricies. Proin ante purus, aliquet vitae nibh vitae, sollicitudin aliquet ex. Cras et tortor tellus.\",\n            \"brand_image\": \"69d4b004-e2e0-438f-99f0-b7b39197091f.jpg\",\n            \"detailed_image\": \"b96fc30e-16da-4463-96af-d9fed68a0da9.png\",\n            \"sender\": \"f52273ea-f05f-4d3b-ac57-a974060526b7\",\n            \"company\": \"69d4b004-e2e0-438f-99f0-b7b39197091f\"\n        }\n    ]\n  }",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "src/controllers/v1.0.0/publication.js",
+    "groupTitle": "Publication",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "optional": false,
+            "field": "Accept-Version",
+            "defaultValue": "1.0.0",
+            "description": ""
+          },
+          {
+            "group": "Header",
+            "optional": false,
+            "field": "Content-Type",
+            "defaultValue": "application/json",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "number",
+            "optional": false,
+            "field": "status",
+            "description": "<p>http status code: 500 to business logic errors and 401 to unauthorized</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "type": "string",
+            "optional": false,
+            "field": "error",
+            "description": "<p>error description</p>"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "get",
     "url": "/publication/company/:id",
-    "title": "03) List by company",
+    "title": "04) List by company",
     "group": "Publication",
     "name": "listPublicationsByCompany",
     "version": "1.0.0",
@@ -2034,8 +2104,8 @@ define({ "api": [
             "group": "Success 200",
             "type": "object",
             "optional": false,
-            "field": "company",
-            "description": "<p>created company</p>"
+            "field": "publication",
+            "description": "<p>publications list by company</p>"
           }
         ]
       },
@@ -2093,7 +2163,7 @@ define({ "api": [
   {
     "type": "get",
     "url": "/publication/tag/:id",
-    "title": "02) List by tag",
+    "title": "03) List by tag",
     "group": "Publication",
     "name": "listPublicationsByTag",
     "version": "1.0.0",
@@ -2117,8 +2187,8 @@ define({ "api": [
             "group": "Success 200",
             "type": "object",
             "optional": false,
-            "field": "company",
-            "description": "<p>created company</p>"
+            "field": "publication",
+            "description": "<p>publications list by tag</p>"
           }
         ]
       },
@@ -2176,7 +2246,7 @@ define({ "api": [
   {
     "type": "delete",
     "url": "/publication/:id",
-    "title": "04) Remove publication",
+    "title": "06) Remove publication",
     "group": "Publication",
     "name": "removePublication",
     "version": "1.0.0",

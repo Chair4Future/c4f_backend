@@ -116,6 +116,9 @@ module.exports = (app) => {
         .post('/publication', versioning({
             "1.0.0": controllers.v1_0_0.publication.create,
         }))
+        .get('/publication/all', versioning({
+            "1.0.0": controllers.v1_0_0.publication.listAll,
+        }))
         .get('/publication/company/:id', versioning({
             "1.0.0": controllers.v1_0_0.publication.listByCompany,
         }))

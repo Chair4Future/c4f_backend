@@ -2,7 +2,7 @@ var db = require('../../models/index');
 
 exports.create = (attributes, owner) => {
   return new Promise((resolve, reject) => {
-    if (name && owner.id) {
+    if (attributes.name && owner.id) {
       let name = attributes.name.replace(/\b\w/g, l => l.toUpperCase());
       db.Company.create({
         name: name,
