@@ -814,6 +814,13 @@ define({ "api": [
             "optional": false,
             "field": "collaborators",
             "description": "<p>(optional) number of collaborators</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "website",
+            "description": "<p>(optional) external link</p>"
           }
         ]
       },
@@ -925,6 +932,13 @@ define({ "api": [
             "optional": false,
             "field": "collaborators",
             "description": "<p>(optional) number of collaborators</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "website",
+            "description": "<p>(optional) external link</p>"
           }
         ]
       }
@@ -937,7 +951,7 @@ define({ "api": [
             "type": "boolean",
             "optional": false,
             "field": "result",
-            "description": "<p>returns false if was successfuly updated</p>"
+            "description": "<p>returns true if was successfuly updated</p>"
           }
         ]
       }
@@ -1007,7 +1021,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Response example:",
-          "content": "{\n \"company\": {\n   \"id\": \"01f52a4c-fc49-4a97-bbe0-c75e4679cd33\",\n   \"name\": \"IBM\",\n   \"logo\": \"e9be456d-23cd-4997-8dd6-408e6b1fec86.jpg\",\n      \"banner\": \"e9be456d-23cd-4997-8dd6-408e6b1fec86.jpg\",\n      \"collaborators\": \"123\",\n   \"BusinessArea\": [\n     {\n       \"id\": \"f8ae926f-39d1-43f5-bdfa-36a2c39c894c\",\n       \"name\": \"International Relationships\"\n     }\n   ],\n   \"Departments\": [],\n   \"Nearshores\": [],\n   \"Websections\": []\n }\n}",
+          "content": "{\n \"company\": {\n   \"id\": \"01f52a4c-fc49-4a97-bbe0-c75e4679cd33\",\n   \"name\": \"Enterprise Inc\",\n   \"logo\": \"e9be456d-23cd-4997-8dd6-408e6b1fec86.jpg\",\n      \"banner\": \"e9be456d-23cd-4997-8dd6-408e6b1fec86.jpg\",\n      \"collaborators\": \"123\",\n      \"website\": \"enterprise.some.com\"\n   \"BusinessArea\": [\n     {\n       \"id\": \"f8ae926f-39d1-43f5-bdfa-36a2c39c894c\",\n       \"name\": \"International Relationships\"\n     }\n   ],\n   \"Departments\": [],\n   \"Nearshores\": [],\n   \"Websections\": []\n }\n}",
           "type": "json"
         }
       ]
@@ -1081,6 +1095,82 @@ define({ "api": [
           "type": "json"
         }
       ]
+    },
+    "filename": "src/controllers/v1.0.0/company.js",
+    "groupTitle": "Company",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "optional": false,
+            "field": "Accept-Version",
+            "defaultValue": "1.0.0",
+            "description": ""
+          },
+          {
+            "group": "Header",
+            "optional": false,
+            "field": "Content-Type",
+            "defaultValue": "application/json",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "number",
+            "optional": false,
+            "field": "status",
+            "description": "<p>http status code: 500 to business logic errors and 401 to unauthorized</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "type": "string",
+            "optional": false,
+            "field": "error",
+            "description": "<p>error description</p>"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "delete",
+    "url": "/company/:id",
+    "title": "04) Remove",
+    "group": "Company",
+    "name": "removeCompany",
+    "version": "1.0.0",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": ":id",
+            "description": "<p>company id</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "boolean",
+            "optional": false,
+            "field": "result",
+            "description": "<p>returns true if was successfuly removed</p>"
+          }
+        ]
+      }
     },
     "filename": "src/controllers/v1.0.0/company.js",
     "groupTitle": "Company",
@@ -1736,7 +1826,26 @@ define({ "api": [
     "title": "01) Upload",
     "group": "Files",
     "name": "fileUpload",
-    "version": "1.0.0",
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "number",
+            "optional": false,
+            "field": "status",
+            "description": "<p>http status code: 500 to business logic errors and 401 to unauthorized</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "type": "string",
+            "optional": false,
+            "field": "error",
+            "description": "<p>error description</p>"
+          }
+        ]
+      }
+    },
     "parameter": {
       "fields": {
         "Parameter": [
@@ -1763,48 +1872,9 @@ define({ "api": [
         ]
       }
     },
+    "version": "0.0.0",
     "filename": "src/controllers/v1.0.0/manage.js",
-    "groupTitle": "Files",
-    "header": {
-      "fields": {
-        "Header": [
-          {
-            "group": "Header",
-            "optional": false,
-            "field": "Accept-Version",
-            "defaultValue": "1.0.0",
-            "description": ""
-          },
-          {
-            "group": "Header",
-            "optional": false,
-            "field": "Content-Type",
-            "defaultValue": "application/json",
-            "description": ""
-          }
-        ]
-      }
-    },
-    "error": {
-      "fields": {
-        "Error 4xx": [
-          {
-            "group": "Error 4xx",
-            "type": "number",
-            "optional": false,
-            "field": "status",
-            "description": "<p>http status code: 500 to business logic errors and 401 to unauthorized</p>"
-          },
-          {
-            "group": "Error 4xx",
-            "type": "string",
-            "optional": false,
-            "field": "error",
-            "description": "<p>error description</p>"
-          }
-        ]
-      }
-    }
+    "groupTitle": "Files"
   },
   {
     "type": "put",

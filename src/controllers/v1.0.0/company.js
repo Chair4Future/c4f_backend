@@ -99,7 +99,7 @@ exports.get = function (req, res) {
 /**
  * @api {put} /company/:id 04) Update
  * @apiGroup Company
- * @apiName getCompany
+ * @apiName updateCompany
  * @apiVersion 1.0.0
  * @apiUse base
  * @apiParam {string} name (optional) valid name
@@ -108,9 +108,26 @@ exports.get = function (req, res) {
  * @apiParam {string} banner (optional) banner filename
  * @apiParam {string} collaborators (optional) number of collaborators
  * @apiParam {string} website (optional) external link 
- * @apiSuccess {boolean} result returns false if was successfuly updated
+ * @apiSuccess {boolean} result returns true if was successfuly updated
  */
 exports.update = (req, res) => {
+  business.company.verifyOwner(req.client, req.params.id).then(
+    company => business.company.update(req.body, company).then(
+      () => res.status(200).json({ result: true }),
+      error => res.status(error.code).send(error.msg)),
+    error => res.status(error.code).send(error.msg))
+}
+
+/**
+ * @api {delete} /company/:id 04) Remove
+ * @apiGroup Company
+ * @apiName removeCompany
+ * @apiVersion 1.0.0
+ * @apiUse base
+ * @apiParam {string} :id company id
+ * @apiSuccess {boolean} result returns true if was successfuly removed
+ */
+exports.remove = (req, res) => {
   business.company.verifyOwner(req.client, req.params.id).then(
     company => business.company.update(req.body, company).then(
       () => res.status(200).json({ result: true }),

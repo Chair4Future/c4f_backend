@@ -46,7 +46,7 @@ exports.get = (id) => {
 exports.update = (attributes, company) => {
   return new Promise((resolve, reject) => {
     let to_update = {};
-    if (attributes.name) { to_update.name = name.replace(/\b\w/g, l => l.toUpperCase()); }
+    if (attributes.name) { to_update.name = attributes.name.replace(/\b\w/g, l => l.toUpperCase()); }
     if (attributes.description) { to_update.description = attributes.description; }
     if (attributes.banner) { to_update.banner = attributes.banner; }
     if (attributes.logo) { to_update.logo = attributes.logo; }
