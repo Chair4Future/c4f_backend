@@ -2532,7 +2532,7 @@ define({ "api": [
   {
     "type": "post",
     "url": "/my/experience",
-    "title": "04) Add experience",
+    "title": "05) Add experience",
     "group": "User",
     "name": "addExperience",
     "version": "1.0.0",
@@ -2664,7 +2664,7 @@ define({ "api": [
   {
     "type": "post",
     "url": "/my/link",
-    "title": "02) Add link",
+    "title": "03) Add link",
     "group": "User",
     "name": "addLink",
     "version": "1.0.0",
@@ -2761,7 +2761,7 @@ define({ "api": [
   {
     "type": "post",
     "url": "/my/skill",
-    "title": "06) Add skill",
+    "title": "07) Add skill",
     "group": "User",
     "name": "addSkill",
     "version": "1.0.0",
@@ -2856,9 +2856,75 @@ define({ "api": [
     }
   },
   {
+    "type": "get",
+    "url": "/my/profile",
+    "title": "01) get profile",
+    "group": "User",
+    "name": "getProfile",
+    "version": "1.0.0",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "optional": false,
+            "field": "Authorization",
+            "defaultValue": "< token >",
+            "description": ""
+          },
+          {
+            "group": "Header",
+            "optional": false,
+            "field": "Accept-Version",
+            "defaultValue": "1.0.0",
+            "description": ""
+          },
+          {
+            "group": "Header",
+            "optional": false,
+            "field": "Content-Type",
+            "defaultValue": "application/json",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "response example:",
+          "content": "{\n    \"profile\": {\n        \"id\": \"564fd83d-d652-429a-89c8-2c62a9f6e4c9\",\n        \"name\": \"user1\",\n        \"email\": \"user@a.aa\",\n        \"birthdate\": \"2018-07-23T05:15:27.000Z\",\n        \"photo\": \"564fd83d-d652-429a-99f0-b7b39197091f.png\",\n        \"country_code\": \"PT\",\n        \"city\": \"Leiria\",\n        \"description\": \"Some description about me\"\n        \"skills\": [\n            {\n                \"id\": \"69d4b004-e2e0-438f-99f0-b7b39197091f\",\n                \"name\": \"java\",\n                \"level\": 5\n            }\n        ],\n        \"experience\": [\n            {\n                \"institution\": \"Minimal Software\",\n                \"function\": \"Team Leader\",\n                \"actual\": true,\n                \"initDate\": \"2018-02-28\",\n                \"endDate\": null,\n                \"description\": \"some work description and responsabilities\",\n                \"is_education\": false\n            }\n        ],\n        \"links\": [\n            {\n                \"id\": \"69d4b004-e2e0-438f-99f0-b7b39197091f\",\n                \"url\": \"https://somesocialnetwork.com/myprofile\",\n                \"social\": 3\n            }\n        ],\n        \"companies\": [\n            {\n                \"id\": \"69d4b004-e2e0-438f-99f0-b7b39197091f\",\n                \"name\": \"Some company\",\n                \"logo\": \"564fd83d-d652-429a-99f0-b7b39197091f.png\"\n            }\n        ]\n    }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "src/controllers/v1.0.0/user.js",
+    "groupTitle": "User",
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "number",
+            "optional": false,
+            "field": "status",
+            "description": "<p>http status code: 500 to business logic errors and 401 to unauthorized</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "type": "string",
+            "optional": false,
+            "field": "error",
+            "description": "<p>error description</p>"
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "delete",
     "url": "/my/experience/:id",
-    "title": "05) Remove experience",
+    "title": "06) Remove experience",
     "group": "User",
     "name": "removeExperience",
     "version": "1.0.0",
@@ -2941,7 +3007,7 @@ define({ "api": [
   {
     "type": "delete",
     "url": "/my/link/:id",
-    "title": "03) Remove link",
+    "title": "04) Remove link",
     "group": "User",
     "name": "removeLink",
     "version": "1.0.0",
@@ -3024,7 +3090,7 @@ define({ "api": [
   {
     "type": "delete",
     "url": "/my/skill/:id",
-    "title": "07) Remove skill",
+    "title": "08) Remove skill",
     "group": "User",
     "name": "removeSkill",
     "version": "1.0.0",
@@ -3107,7 +3173,7 @@ define({ "api": [
   {
     "type": "put",
     "url": "/my/profile",
-    "title": "01) Update profile",
+    "title": "02) Update profile",
     "group": "User",
     "name": "updateProfile",
     "version": "1.0.0",
