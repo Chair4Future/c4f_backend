@@ -11,7 +11,7 @@ exports.create = (attributes, user, is_owner) => {
       sender: user.id,
       company: attributes.company_id,
       approved: is_owner,
-      datetime: Date.now()
+      datetime: new Date()
     }, (err, res) => {
       if (err) reject({ code: 500, msg: err.message });
       resolve(res);
