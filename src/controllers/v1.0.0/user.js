@@ -122,7 +122,31 @@ exports.changePassword = function (req, res) {
 }
 
 /**
- * @api {post} /my/link 01) Add link
+ * @api {put} /my/profile 01) Update profile
+ * @apiGroup User
+ * @apiName updateProfile
+ * @apiVersion 1.0.0
+ * @apiUse auth
+ * @apiHeader Authorization="< token >"
+ * @apiParam {string} birthdate (optional) user birthdate
+ * @apiParam {string} city (optional) user living city
+ * @apiParam {string} country_code (optional) must follow the standard ISO 3166 alpha-2
+ * @apiParam {string} photo (optional) user profile photo
+ * @apiParam {string} description (optional) user description
+ * @apiSuccess {boolean} result return true if was sucessfuly updated
+ */
+exports.updateProfile = function (req, res) {
+    if (req.client) {
+        business.user.update(req.body, req.client).then(
+            () => res.status(200).json({ result: true }),
+            error => res.status(error.code).send(error.msg));
+    } else {
+        res.status(401).send("Unauthorized");
+    }
+}
+
+/**
+ * @api {post} /my/link 02) Add link
  * @apiGroup User
  * @apiName addLink
  * @apiVersion 1.0.0
@@ -148,7 +172,7 @@ exports.addLink = function (req, res) {
 }
 
 /**
- * @api {delete} /my/link/:id 02) Remove link
+ * @api {delete} /my/link/:id 03) Remove link
  * @apiGroup User
  * @apiName removeLink
  * @apiVersion 1.0.0
@@ -168,7 +192,7 @@ exports.removeLink = function (req, res) {
 }
 
 /**
- * @api {post} /my/experience 03) Add experience
+ * @api {post} /my/experience 04) Add experience
  * @apiGroup User
  * @apiName addExperience
  * @apiVersion 1.0.0
@@ -204,7 +228,7 @@ exports.addExperience = function (req, res) {
 }
 
 /**
- * @api {delete} /my/experience/:id 04) Remove experience
+ * @api {delete} /my/experience/:id 05) Remove experience
  * @apiGroup User
  * @apiName removeExperience
  * @apiVersion 1.0.0
@@ -224,7 +248,7 @@ exports.removeExperience = function (req, res) {
 }
 
 /**
- * @api {post} /my/skill 05) Add skill
+ * @api {post} /my/skill 06) Add skill
  * @apiGroup User
  * @apiName addSkill
  * @apiVersion 1.0.0
@@ -250,7 +274,7 @@ exports.addSkill = function (req, res) {
 }
 
 /**
- * @api {delete} /my/skill/:id 06) Remove skill
+ * @api {delete} /my/skill/:id 07) Remove skill
  * @apiGroup User
  * @apiName removeSkill
  * @apiVersion 1.0.0
