@@ -119,7 +119,7 @@ exports.update = (req, res) => {
 }
 
 /**
- * @api {delete} /company/:id 04) Remove
+ * @api {delete} /company/:id 05) Remove
  * @apiGroup Company
  * @apiName removeCompany
  * @apiVersion 1.0.0
@@ -136,7 +136,7 @@ exports.remove = (req, res) => {
 }
 
 /**
- * @api {post} /company/:id/nearshore 05) Add nearshore
+ * @api {post} /company/:id/nearshore 06) Add nearshore
  * @apiGroup Company
  * @apiName addNearshore
  * @apiVersion 1.0.0
@@ -167,12 +167,12 @@ exports.addNearshore = (req, res) => {
 }
 
 /**
- * @api {delete} /company/:cid/nearshore/:nid 06) Remove nearshore
+ * @api {delete} /company/:cid/nearshore/:nid 07) Remove nearshore
  * @apiGroup Company
  * @apiName removeNearshore
  * @apiVersion 1.0.0
  * @apiUse base
- * @apiSuccess {boolean} result returns false if was successfuly removed
+ * @apiSuccess {boolean} result returns true if was successfuly removed
  */
 exports.removeNearshore = (req, res) => {
   business.company.verifyOwner(req.client, req.params.cid).then(
@@ -183,7 +183,7 @@ exports.removeNearshore = (req, res) => {
 }
 
 /**
- * @api {post} /company/:id/websection 07) Add websection
+ * @api {post} /company/:id/websection 08) Add websection
  * @apiGroup Company
  * @apiName addWebsection
  * @apiVersion 1.0.0
@@ -216,7 +216,7 @@ exports.addWebsection = (req, res) => {
 }
 
 /**
- * @api {put} /company/:cid/websection/:wid 08) Update websection
+ * @api {put} /company/:cid/websection/:wid 09) Update websection
  * @apiGroup Company
  * @apiName updateWebsection
  * @apiVersion 1.0.0
@@ -225,7 +225,7 @@ exports.addWebsection = (req, res) => {
  * @apiParam {string} text description of the section
  * @apiParam {string} code (optional) code of the section layout
  * @apiParam {string} image (optional) image filename to section
- * @apiSuccess {boolean} result returns false if was successfuly updated
+ * @apiSuccess {boolean} result returns true if was successfuly updated
  */
 exports.updateWebsection = (req, res) => {
   business.company.verifyOwner(req.client, req.params.cid).then(
@@ -236,12 +236,12 @@ exports.updateWebsection = (req, res) => {
 }
 
 /**
- * @api {delete} /company/:cid/websection/:wid 09) Remove websection
+ * @api {delete} /company/:cid/websection/:wid 10) Remove websection
  * @apiGroup Company
  * @apiName removeNearshore
  * @apiVersion 1.0.0
  * @apiUse base
- * @apiSuccess {boolean} result returns false if was successfuly removed
+ * @apiSuccess {boolean} result returns true if was successfuly removed
  */
 exports.removeWebsection = (req, res) => {
   business.company.verifyOwner(req.client, req.params.cid).then(
@@ -252,7 +252,7 @@ exports.removeWebsection = (req, res) => {
 }
 
 /**
- * @api {post} /company/:id/department 10) Add department
+ * @api {post} /company/:id/department 11) Add department
  * @apiGroup Company
  * @apiName addDepartment
  * @apiVersion 1.0.0
@@ -290,12 +290,12 @@ exports.addDepartment = function (req, res) {
 }
 
 /**
- * @api {delete} /company/:cid/department/:did 11) Remove department
+ * @api {delete} /company/:cid/department/:did 12) Remove department
  * @apiGroup Company
  * @apiName removeDepartment
  * @apiVersion 1.0.0
  * @apiUse base
- * @apiSuccess {boolean} result returns false if was successfuly removed
+ * @apiSuccess {boolean} result returns true if was successfuly removed
  */
 exports.removeDepartment = (req, res) => {
   business.company.verifyOwner(req.client, req.params.cid).then(

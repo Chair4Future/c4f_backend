@@ -447,7 +447,7 @@ define({ "api": [
   {
     "type": "post",
     "url": "/company/:id/department",
-    "title": "10) Add department",
+    "title": "11) Add department",
     "group": "Company",
     "name": "addDepartment",
     "version": "1.0.0",
@@ -551,7 +551,7 @@ define({ "api": [
   {
     "type": "post",
     "url": "/company/:id/nearshore",
-    "title": "05) Add nearshore",
+    "title": "06) Add nearshore",
     "group": "Company",
     "name": "addNearshore",
     "version": "1.0.0",
@@ -648,7 +648,7 @@ define({ "api": [
   {
     "type": "post",
     "url": "/company/:id/websection",
-    "title": "07) Add websection",
+    "title": "08) Add websection",
     "group": "Company",
     "name": "addWebsection",
     "version": "1.0.0",
@@ -889,117 +889,6 @@ define({ "api": [
     }
   },
   {
-    "type": "put",
-    "url": "/company/:id",
-    "title": "04) Update",
-    "group": "Company",
-    "name": "getCompany",
-    "version": "1.0.0",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "name",
-            "description": "<p>(optional) valid name</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "description",
-            "description": "<p>(optional) company description</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "logo",
-            "description": "<p>(optional) logo filename</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "banner",
-            "description": "<p>(optional) banner filename</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "collaborators",
-            "description": "<p>(optional) number of collaborators</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "website",
-            "description": "<p>(optional) external link</p>"
-          }
-        ]
-      }
-    },
-    "success": {
-      "fields": {
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "type": "boolean",
-            "optional": false,
-            "field": "result",
-            "description": "<p>returns true if was successfuly updated</p>"
-          }
-        ]
-      }
-    },
-    "filename": "src/controllers/v1.0.0/company.js",
-    "groupTitle": "Company",
-    "header": {
-      "fields": {
-        "Header": [
-          {
-            "group": "Header",
-            "optional": false,
-            "field": "Accept-Version",
-            "defaultValue": "1.0.0",
-            "description": ""
-          },
-          {
-            "group": "Header",
-            "optional": false,
-            "field": "Content-Type",
-            "defaultValue": "application/json",
-            "description": ""
-          }
-        ]
-      }
-    },
-    "error": {
-      "fields": {
-        "Error 4xx": [
-          {
-            "group": "Error 4xx",
-            "type": "number",
-            "optional": false,
-            "field": "status",
-            "description": "<p>http status code: 500 to business logic errors and 401 to unauthorized</p>"
-          },
-          {
-            "group": "Error 4xx",
-            "type": "string",
-            "optional": false,
-            "field": "error",
-            "description": "<p>error description</p>"
-          }
-        ]
-      }
-    }
-  },
-  {
     "type": "get",
     "url": "/company/:id",
     "title": "03) Get",
@@ -1142,7 +1031,7 @@ define({ "api": [
   {
     "type": "delete",
     "url": "/company/:id",
-    "title": "04) Remove",
+    "title": "05) Remove",
     "group": "Company",
     "name": "removeCompany",
     "version": "1.0.0",
@@ -1218,7 +1107,7 @@ define({ "api": [
   {
     "type": "delete",
     "url": "/company/:cid/department/:did",
-    "title": "11) Remove department",
+    "title": "12) Remove department",
     "group": "Company",
     "name": "removeDepartment",
     "version": "1.0.0",
@@ -1230,7 +1119,7 @@ define({ "api": [
             "type": "boolean",
             "optional": false,
             "field": "result",
-            "description": "<p>returns false if was successfuly removed</p>"
+            "description": "<p>returns true if was successfuly removed</p>"
           }
         ]
       }
@@ -1281,7 +1170,7 @@ define({ "api": [
   {
     "type": "delete",
     "url": "/company/:cid/nearshore/:nid",
-    "title": "06) Remove nearshore",
+    "title": "07) Remove nearshore",
     "group": "Company",
     "name": "removeNearshore",
     "version": "1.0.0",
@@ -1293,7 +1182,7 @@ define({ "api": [
             "type": "boolean",
             "optional": false,
             "field": "result",
-            "description": "<p>returns false if was successfuly removed</p>"
+            "description": "<p>returns true if was successfuly removed</p>"
           }
         ]
       }
@@ -1344,7 +1233,7 @@ define({ "api": [
   {
     "type": "delete",
     "url": "/company/:cid/websection/:wid",
-    "title": "09) Remove websection",
+    "title": "10) Remove websection",
     "group": "Company",
     "name": "removeNearshore",
     "version": "1.0.0",
@@ -1356,7 +1245,118 @@ define({ "api": [
             "type": "boolean",
             "optional": false,
             "field": "result",
-            "description": "<p>returns false if was successfuly removed</p>"
+            "description": "<p>returns true if was successfuly removed</p>"
+          }
+        ]
+      }
+    },
+    "filename": "src/controllers/v1.0.0/company.js",
+    "groupTitle": "Company",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "optional": false,
+            "field": "Accept-Version",
+            "defaultValue": "1.0.0",
+            "description": ""
+          },
+          {
+            "group": "Header",
+            "optional": false,
+            "field": "Content-Type",
+            "defaultValue": "application/json",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "number",
+            "optional": false,
+            "field": "status",
+            "description": "<p>http status code: 500 to business logic errors and 401 to unauthorized</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "type": "string",
+            "optional": false,
+            "field": "error",
+            "description": "<p>error description</p>"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "put",
+    "url": "/company/:id",
+    "title": "04) Update",
+    "group": "Company",
+    "name": "updateCompany",
+    "version": "1.0.0",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "name",
+            "description": "<p>(optional) valid name</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "description",
+            "description": "<p>(optional) company description</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "logo",
+            "description": "<p>(optional) logo filename</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "banner",
+            "description": "<p>(optional) banner filename</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "collaborators",
+            "description": "<p>(optional) number of collaborators</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "website",
+            "description": "<p>(optional) external link</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "boolean",
+            "optional": false,
+            "field": "result",
+            "description": "<p>returns true if was successfuly updated</p>"
           }
         ]
       }
@@ -1407,7 +1407,7 @@ define({ "api": [
   {
     "type": "put",
     "url": "/company/:cid/websection/:wid",
-    "title": "08) Update websection",
+    "title": "09) Update websection",
     "group": "Company",
     "name": "updateWebsection",
     "version": "1.0.0",
@@ -1453,7 +1453,7 @@ define({ "api": [
             "type": "boolean",
             "optional": false,
             "field": "result",
-            "description": "<p>returns false if was successfuly updated</p>"
+            "description": "<p>returns true if was successfuly updated</p>"
           }
         ]
       }
