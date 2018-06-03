@@ -122,7 +122,70 @@ exports.changePassword = function (req, res) {
 }
 
 /**
- * @api {put} /my/profile 01) Update profile
+ * @api {get} /my/profile 01) get profile
+ * @apiGroup User
+ * @apiName getProfile
+ * @apiVersion 1.0.0
+ * @apiUse auth
+ * @apiHeader Authorization="< token >"
+ * @apiSuccessExample {json} response example:
+ * {
+    "profile": {
+        "id": "564fd83d-d652-429a-89c8-2c62a9f6e4c9",
+        "name": "user1",
+        "email": "user@a.aa",
+        "birthdate": "2018-07-23T05:15:27.000Z",
+        "photo": "564fd83d-d652-429a-99f0-b7b39197091f.png",
+        "country_code": "PT",
+        "city": "Leiria",
+        "description": "Some description about me"
+        "skills": [
+            {
+                "id": "69d4b004-e2e0-438f-99f0-b7b39197091f",
+                "name": "java",
+                "level": 5
+            }
+        ],
+        "experience": [
+            {
+                "institution": "Minimal Software",
+                "function": "Team Leader",
+                "actual": true,
+                "initDate": "2018-02-28",
+                "endDate": null,
+                "description": "some work description and responsabilities",
+                "is_education": false
+            }
+        ],
+        "links": [
+            {
+                "id": "69d4b004-e2e0-438f-99f0-b7b39197091f",
+                "url": "https://somesocialnetwork.com/myprofile",
+                "social": 3
+            }
+        ],
+        "companies": [
+            {
+                "id": "69d4b004-e2e0-438f-99f0-b7b39197091f",
+                "name": "Some company",
+                "logo": "564fd83d-d652-429a-99f0-b7b39197091f.png"
+            }
+        ]
+    }
+}
+ */
+exports.getProfile = function (req, res) {
+    if (req.client) {
+        business.user.getProfile(req.client.id).then(
+            profile => res.status(200).json({ profile: profile }),
+            error => res.status(error.code).send(error.msg));
+    } else {
+        res.status(401).send("Unauthorized");
+    }
+}
+
+/**
+ * @api {put} /my/profile 02) Update profile
  * @apiGroup User
  * @apiName updateProfile
  * @apiVersion 1.0.0
@@ -146,7 +209,7 @@ exports.updateProfile = function (req, res) {
 }
 
 /**
- * @api {post} /my/link 02) Add link
+ * @api {post} /my/link 03) Add link
  * @apiGroup User
  * @apiName addLink
  * @apiVersion 1.0.0
@@ -172,7 +235,7 @@ exports.addLink = function (req, res) {
 }
 
 /**
- * @api {delete} /my/link/:id 03) Remove link
+ * @api {delete} /my/link/:id 04) Remove link
  * @apiGroup User
  * @apiName removeLink
  * @apiVersion 1.0.0
@@ -192,7 +255,7 @@ exports.removeLink = function (req, res) {
 }
 
 /**
- * @api {post} /my/experience 04) Add experience
+ * @api {post} /my/experience 05) Add experience
  * @apiGroup User
  * @apiName addExperience
  * @apiVersion 1.0.0
@@ -228,7 +291,7 @@ exports.addExperience = function (req, res) {
 }
 
 /**
- * @api {delete} /my/experience/:id 05) Remove experience
+ * @api {delete} /my/experience/:id 06) Remove experience
  * @apiGroup User
  * @apiName removeExperience
  * @apiVersion 1.0.0
@@ -248,7 +311,7 @@ exports.removeExperience = function (req, res) {
 }
 
 /**
- * @api {post} /my/skill 06) Add skill
+ * @api {post} /my/skill 07) Add skill
  * @apiGroup User
  * @apiName addSkill
  * @apiVersion 1.0.0
@@ -274,7 +337,7 @@ exports.addSkill = function (req, res) {
 }
 
 /**
- * @api {delete} /my/skill/:id 07) Remove skill
+ * @api {delete} /my/skill/:id 08) Remove skill
  * @apiGroup User
  * @apiName removeSkill
  * @apiVersion 1.0.0

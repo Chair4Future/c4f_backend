@@ -102,6 +102,50 @@ exports.findByEmail = (email) => {
     });
 }
 
+exports.getProfile = (id) => {
+    return new Promise((resolve, reject) => {
+        db.User.findOne({
+            where: { id: id }, include: [
+                { model: db.Skill },
+                { model: db.Experience },
+                { model: db.Link },
+                {
+                    model: db.Department, include: [
+                        { model: db.Company, attributes: ["id", "name", "logo"] }
+                    ]
+                }
+            ]
+        }).then(
+            res => {
+                if (res) {
+                    resolve({
+                        id: res.id,
+                        name: utils.decrypt(res.name),
+                        email: utils.decrypt(res.email),
+                        birthdate: res.birthdate,
+                        photo: res.photo,
+                        country_code: res.country_code,
+                        city: res.city,
+                        description: res.description,
+                        skills: res.Skills.map(element => {
+                            return {
+                                "id": element.id,
+                                "name": element.name,
+                                "level": element.UserSkill.level,
+                                "created_at": element.UserSkill.created_at,
+                                "updated_at": element.UserSkill.updated_at
+                            }
+                        }),
+                        experience: res.Experiences,
+                        links: res.Links,
+                        companies: res.Departments.map(el => el.Company)
+                    });
+                }
+                else { reject({ code: 500, msg: "email and password don't match" }); }
+            }, err => reject({ code: 500, msg: err.message }));
+    });
+}
+
 exports.update = (attributes, user) => {
     return new Promise((resolve, reject) => {
         let to_update = {};

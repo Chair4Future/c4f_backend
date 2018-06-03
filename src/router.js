@@ -17,6 +17,9 @@ module.exports = (app) => {
         .post('/chpass', versioning({
             "1.0.0": controllers.v1_0_0.user.changePassword,
         }))
+        .get('/my/profile', versioning({
+            "1.0.0": controllers.v1_0_0.user.getProfile,
+        }))
         .put('/my/profile', versioning({
             "1.0.0": controllers.v1_0_0.user.updateProfile,
         }))

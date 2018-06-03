@@ -56,6 +56,7 @@ exports.listAll = () => {
                   "brand_image": publication.brand_image,
                   "detailed_image": publication.detailed_image,
                   "sender": publication.sender,
+                  "views": publication.views,
                   "company_id": company.id,
                   "company_name": company.name,
                   "company_logo": company.logo,
