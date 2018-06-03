@@ -14,6 +14,7 @@ var business = require('../../business/index').v1_0_0;
  * @apiParam {string} logo (optional) logo filename
  * @apiParam {string} banner (optional) banner filename
  * @apiParam {string} collaborators (optional) number of collaborators
+ * @apiParam {string} website (optional) external link 
  * @apiParamExample {Object} Response example:
  * {
  *    "name": "Instituto Baldes de Massa",
@@ -72,10 +73,11 @@ exports.list = function (req, res) {
  * {
  *  "company": {
  *    "id": "01f52a4c-fc49-4a97-bbe0-c75e4679cd33",
- *    "name": "IBM",
+ *    "name": "Enterprise Inc",
  *    "logo": "e9be456d-23cd-4997-8dd6-408e6b1fec86.jpg",
       "banner": "e9be456d-23cd-4997-8dd6-408e6b1fec86.jpg",
       "collaborators": "123",
+      "website": "enterprise.some.com"
  *    "BusinessArea": [
  *      {
  *        "id": "f8ae926f-39d1-43f5-bdfa-36a2c39c894c",
@@ -105,6 +107,7 @@ exports.get = function (req, res) {
  * @apiParam {string} logo (optional) logo filename
  * @apiParam {string} banner (optional) banner filename
  * @apiParam {string} collaborators (optional) number of collaborators
+ * @apiParam {string} website (optional) external link 
  * @apiSuccess {boolean} result returns false if was successfuly updated
  */
 exports.update = (req, res) => {

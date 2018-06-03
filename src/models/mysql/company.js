@@ -26,7 +26,8 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: true
     },
-    description: { type: DataTypes.TEXT('long') }
+    description: { type: DataTypes.TEXT('long') },
+    website: { type: DataTypes.STRING }
   }, { underscored: true });
 
   Company.associate = function (models) {

@@ -10,7 +10,8 @@ exports.create = (attributes, owner) => {
         description: attributes.description,
         banner: attributes.banner,
         logo: attributes.logo,
-        collaborators: attributes.collaborators
+        collaborators: attributes.collaborators,
+        website: attributes.website
       }).then(
         res => resolve(res),
         err => reject({ code: 500, msg: err.message }));
@@ -29,7 +30,7 @@ exports.list = () => {
 exports.get = (id) => {
   return new Promise((resolve, reject) => {
     db.Company.findById(id, {
-      attributes: ['id', 'name', 'logo', 'banner', 'collaborators'],
+      attributes: ['id', 'name', 'logo', 'banner', 'collaborators', 'description', 'website'],
       include: [
         { model: db.Business, attributes: ['id', 'name'] },
         { model: db.Department, attributes: ['id', 'name', 'email', 'phone'] },
@@ -50,6 +51,7 @@ exports.update = (attributes, company) => {
     if (attributes.banner) { to_update.banner = attributes.banner; }
     if (attributes.logo) { to_update.logo = attributes.logo; }
     if (attributes.collaborators) { to_update.collaborators = attributes.collaborators; }
+    if (attributes.website) { to_update.website = attributes.website; }
     company.update(to_update).then(
       () => resolve(),
       err => reject({ code: 500, msg: err.message }));
