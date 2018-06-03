@@ -72,7 +72,7 @@ module.exports = (app) => {
             "1.0.0": controllers.v1_0_0.company.update,
         }))
         .delete('/company/:id', versioning({
-            "1.0.0": controllers.v1_0_0.company.,
+            "1.0.0": controllers.v1_0_0.company.remove,
         }))
         .post('/company/:id/nearshore', versioning({
             "1.0.0": controllers.v1_0_0.company.addNearshore,
