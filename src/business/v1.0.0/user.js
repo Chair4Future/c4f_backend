@@ -110,7 +110,7 @@ exports.update = (attributes, user) => {
         if (attributes.photo) { to_update.photo = attributes.photo; }
         if (attributes.description) { to_update.description = attributes.description; }
         if (attributes.city) { to_update.city = attributes.city.replace(/\b\w/g, l => l.toUpperCase()); }
-        db.User.update(to_update).then(
+        user.update(to_update).then(
             () => resolve(),
             err => reject({ code: 500, msg: err.message }));
     });
