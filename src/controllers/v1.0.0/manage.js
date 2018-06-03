@@ -4,8 +4,8 @@ var business = require('../../business/index').v1_0_0;
  * @api {post} /file 01) Upload
  * @apiGroup Files
  * @apiName fileUpload
- * @apiVersion 1.0.0
- * @apiUse base
+ * @apiError {number} status http status code: 500 to business logic errors and 401 to unauthorized
+ * @apiError {string} error error description
  * @apiParam {File} name html input name must be "file"
  * @apiSuccess {String} filename new filename to file
  */

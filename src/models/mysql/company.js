@@ -26,7 +26,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: true
     },
-    description: { type: DataTypes.STRING }
+    description: { type: DataTypes.TEXT }
   }, { underscored: true });
 
   Company.associate = function (models) {

@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true
     },
     title: { type: DataTypes.STRING},
-    text: { type: DataTypes.STRING},
+    text: { type: DataTypes.TEXT},
     image: { type: DataTypes.STRING},
     code: { type: DataTypes.INTEGER}
   }, {underscored: true });
