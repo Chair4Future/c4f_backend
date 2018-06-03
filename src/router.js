@@ -68,6 +68,9 @@ module.exports = (app) => {
         .get('/company/:id', versioning({
             "1.0.0": controllers.v1_0_0.company.get,
         }))
+        .put('/company/:id', versioning({
+            "1.0.0": controllers.v1_0_0.company.update,
+        }))
         .post('/company/:id/nearshore', versioning({
             "1.0.0": controllers.v1_0_0.company.addNearshore,
         }))
