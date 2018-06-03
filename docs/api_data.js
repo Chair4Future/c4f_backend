@@ -2532,7 +2532,7 @@ define({ "api": [
   {
     "type": "post",
     "url": "/my/experience",
-    "title": "03) Add experience",
+    "title": "04) Add experience",
     "group": "User",
     "name": "addExperience",
     "version": "1.0.0",
@@ -2664,7 +2664,7 @@ define({ "api": [
   {
     "type": "post",
     "url": "/my/link",
-    "title": "01) Add link",
+    "title": "02) Add link",
     "group": "User",
     "name": "addLink",
     "version": "1.0.0",
@@ -2761,7 +2761,7 @@ define({ "api": [
   {
     "type": "post",
     "url": "/my/skill",
-    "title": "05) Add skill",
+    "title": "06) Add skill",
     "group": "User",
     "name": "addSkill",
     "version": "1.0.0",
@@ -2858,7 +2858,7 @@ define({ "api": [
   {
     "type": "delete",
     "url": "/my/experience/:id",
-    "title": "04) Remove experience",
+    "title": "05) Remove experience",
     "group": "User",
     "name": "removeExperience",
     "version": "1.0.0",
@@ -2941,7 +2941,7 @@ define({ "api": [
   {
     "type": "delete",
     "url": "/my/link/:id",
-    "title": "02) Remove link",
+    "title": "03) Remove link",
     "group": "User",
     "name": "removeLink",
     "version": "1.0.0",
@@ -3024,7 +3024,7 @@ define({ "api": [
   {
     "type": "delete",
     "url": "/my/skill/:id",
-    "title": "06) Remove skill",
+    "title": "07) Remove skill",
     "group": "User",
     "name": "removeSkill",
     "version": "1.0.0",
@@ -3077,6 +3077,117 @@ define({ "api": [
             "optional": false,
             "field": "result",
             "description": "<p>return true if was sucessfuly removed</p>"
+          }
+        ]
+      }
+    },
+    "filename": "src/controllers/v1.0.0/user.js",
+    "groupTitle": "User",
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "number",
+            "optional": false,
+            "field": "status",
+            "description": "<p>http status code: 500 to business logic errors and 401 to unauthorized</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "type": "string",
+            "optional": false,
+            "field": "error",
+            "description": "<p>error description</p>"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "put",
+    "url": "/my/profile",
+    "title": "01) Update profile",
+    "group": "User",
+    "name": "updateProfile",
+    "version": "1.0.0",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "optional": false,
+            "field": "Authorization",
+            "defaultValue": "< token >",
+            "description": ""
+          },
+          {
+            "group": "Header",
+            "optional": false,
+            "field": "Accept-Version",
+            "defaultValue": "1.0.0",
+            "description": ""
+          },
+          {
+            "group": "Header",
+            "optional": false,
+            "field": "Content-Type",
+            "defaultValue": "application/json",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "birthdate",
+            "description": "<p>(optional) user birthdate</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "city",
+            "description": "<p>(optional) user living city</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "country_code",
+            "description": "<p>(optional) must follow the standard ISO 3166 alpha-2</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "photo",
+            "description": "<p>(optional) user profile photo</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "description",
+            "description": "<p>(optional) user description</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "boolean",
+            "optional": false,
+            "field": "result",
+            "description": "<p>return true if was sucessfuly updated</p>"
           }
         ]
       }
