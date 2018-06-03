@@ -10,7 +10,8 @@ exports.create = (attributes, user, is_owner) => {
       detailed_image: attributes.detailed_image,
       sender: user.id,
       company: attributes.company_id,
-      approved: is_owner
+      approved: is_owner,
+      datetime: Date.now()
     }, (err, res) => {
       if (err) reject({ code: 500, msg: err.message });
       resolve(res);

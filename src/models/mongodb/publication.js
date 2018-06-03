@@ -20,8 +20,7 @@ module.exports = (mongoose) => {
     },
     datetime: {
       type: Date,
-      required: true,
-      default: Date.now()
+      required: true
     },
     likes: {
       type: Number,
